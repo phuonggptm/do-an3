@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script type="text/javascript">
+$(document).ready(function() {
+	//alert("hello");
+//	$("input").val("123");
+//$("#1").val("pham");
+//alert($("#1").val());
+	$("#home").click(function(){
+		$("#manager").show();
+		$("#add_menu").show();
+	})
+	$("#manager").click(function() {
+		/* Act on the event */
+		$("#manager_panel").show();
+		$("#user_panel").hide();
+
+	});
+
+	$("#add_menu").click(function() {
+		/* Act on the event */
+		$("#manager_panel").hide();
+		$("#user_panel").show();
+
+	});
+	$("#add_user").click(function() {
+		/* Act on the event */
+		var fullname =$("[name=fullname]").val();
+		var add =$("[name=add]").val();
+		var email =$("[name=email]").val();
+		var age = $("[name=age]").val();
+
+	});
+
+});
+</script>
+<body>
+	<ul class="breadcrumb">
+		<li  id="home">Home</li>
+		<li id="manager">User Manager</li>
+		<li id ="add_menu">Add user</li>
+	</ul>
+	<div class="container-fluid" id="manager_panel">
+		
+		<div class="panel panel-primary">
+			<div class="panel-heading">User mannagement</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>No</td>
+							<td>Full Name</td>
+							<td>Age</td>
+							<td>Email</td>
+							<td>Phone Number</td>
+
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+		</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="user_panel">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Add User</div>
+			<div class="panel-body">
+				<form method="get" action="#add_user">
+					<input type="text" id="1" name="fullname" placeholder="Full Name"><br>
+					<input type="text" id="2" name="add" size="50" placeholder="Address"><br>
+					<input type="number" name="age" placeholder="Age"><br>
+					<input type="email" name="email" placeholder="Email"><br>
+					<button type="button" id="add_user">Submit</button>
+					<button type="button">Reset</button>
+				</form>
+		</div>
+		</div>
+	</div>
+	
+</body>
+ <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</html>
