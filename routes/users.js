@@ -1,27 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var flash = require('connect-flash');
 var bcrypt = require('bcryptjs');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../model/User.js')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	if(req.isAuthenticated() && ( req.user.isAdmin ==='admin')){
+	console.log(req.isAuthenticated());
+	if(req.isAuthenticated() && (  'admin' === req.user.type)){
 		// console.log(req.user);
  	res.render('admin/index',{user : req.user ? req.user : undefined});
  	}
- 	if(req.isAuthenticated() &&  req.user.isAdmin === 'option1'){
+ 	if(req.isAuthenticated() && 'option1' == req.user.type ){
   	 // console.log(req.user.isAdmin);
  	console.log("true2"); 
  	res.render('landlord/index', {user : req.user ? req.user : undefined});
 	}
 
- 	if(req.isAuthenticated() && req.user.isAdmin === 'option2'){
+ 	else if(req.isAuthenticated() && 'option2' === req.user.type  ){
  	res.render('user/index', {user : req.user ? req.user : undefined});	
 	}
 	else{
+		console.log("trang chu");
 		res.render("index.ejs")
+		
 	}
 })
 
@@ -29,7 +33,8 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/resgiter', function(req,res,next){
-	res.render("user/resgiter");
+	
+	res.render("user/resgiter")
 });
 
 router.post('/resgiter',function(req,res,next){
@@ -69,17 +74,56 @@ router.post('/resgiter',function(req,res,next){
 				
 			User.createUser(newUser, function(err,user){
 				if(err) throw err;})
-			res.location('/');
-			res.redirect('/');
+			res.render("user/signin")
 			 
 	}});
 })
 
+
+router.get('/login', function(req,res,next){
+	var messages = req.flash('error');
+	res.render('user/signin',{
+		messages: messages
+	})
+})
 router.post('/login', function(req,res,next){
-
-
- 
+	passport.authenticate('local-login',{successRedirect:'/',failureRedirect:'/users/login',failureFlash:true})(req, res,next)
  
 })
+
+passport.serializeUser(function(user, done) { 
+	console.log("serialize");
+	done(null, user.id); 
+}); 
+   
+   // used to deserialize the user 
+passport.deserializeUser(function(id, done) { 
+	User.getUserById(id, function(err, user) { 
+	   console.log(user.type);
+	done(err, user); 
+	}); 
+}); 
+
+passport.use('local-login',new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  }, function(email,password,done){
+  let query = {email: email};
+  User.findOne(query,function(err,user){
+    if(err) throw err; 
+    if(!user){
+      return done(null,false, {message:'Tài khoản không tồn tại'});
+    }
+
+    bcrypt.compare(password, user.password,function(err,isMatch){
+      if(err) return done(err);
+      if(isMatch){
+        return done(null, user);
+      }else{
+        return done(null,false, { message:'Mật khẩu không đúng.'});
+      }
+    });
+  });
+}));
 
 module.exports = router;

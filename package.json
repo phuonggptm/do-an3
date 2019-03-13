@@ -27,6 +27,8 @@
     "debug": "^2.6.9",
     "ejs": "^2.5.9",
     "express": "^4.16.4",
+    "express-message": "^1.2.3",
+    "express-messages": "^1.0.1",
     "http-errors": "^1.7.2",
     "morgan": "^1.9.1",
     "parser": "^0.1.4",
