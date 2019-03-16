@@ -7,29 +7,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../model/User.js')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-	console.log(req.isAuthenticated());
-	if(req.isAuthenticated() && (  'admin' === req.user.type)){
-		// console.log(req.user);
- 	res.render('admin/index',{user : req.user ? req.user : undefined});
- 	}
- 	if(req.isAuthenticated() && 'option1' == req.user.type ){
-  	 // console.log(req.user.isAdmin);
- 	console.log("true2"); 
- 	res.render('landlord/index', {user : req.user ? req.user : undefined});
-	}
-
- 	else if(req.isAuthenticated() && 'option2' === req.user.type  ){
- 	res.render('user/index', {user : req.user ? req.user : undefined});	
-	}
-	else{
-		console.log("trang chu");
-		res.render("index.ejs")
-		
-	}
-})
-
-
 
 
 router.get('/resgiter', function(req,res,next){

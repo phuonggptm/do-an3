@@ -21,17 +21,10 @@
     <link id="switcher" href="/css/theme-color/default-theme.css" rel="stylesheet">     
 
     <!-- Main style sheet -->
-    <link href="/css/style1.css" rel="stylesheet">  
-    <link href="/theme/css/header.css" rel="stylesheet">     
+    <link href="/css/style.css" rel="stylesheet">    
     <link rel="stylesheet" href="/theme/css/postadd.css">
-  
-
-    <!-- Main style sheet -->
-    <link href="/theme/css/style.css" rel="stylesheet">    
-    <link href="/theme/css/detailedproperty.css" rel="stylesheet">    
-
+    
    
-
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -74,8 +67,8 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a href="/users/update" class="aa-register">UPDATE</a>
-                  <a href="/users/logout" class="aa-login">LOGOUT</a>
+                  <a href="/users/resgiter" class="aa-register">Register</a>
+                  <a href="/users/login" class="aa-login">Login</a>
                 </div>
               </div>
             </div>
@@ -165,15 +158,15 @@
                
              
 
-           <form method="post" action="/landlord/postproperty" enctype="multipart/form-data">
+           <form method="post" action="postproperty" enctype="multipart/form-data">
                  <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
-                  
+                  <button class="add_field_button1">Add More Images</button><br><br>
                  
                     <div class="input_fields_wrap1">
                     <div>
-                      <input type="file" name="filename" id="f_1" class="f">
-                      <input type="file" name="filename" id="n_1" class="n">
-                      <input type="file" name="filename" id="l_1" class="l">
+                      <input type="file" name="file" id="f_1" class="f">
+                      <input type="hidden" name="filename" id="n_1" class="n">
+                      <input type="hidden" name="filelinks" id="l_1" class="l">
                       <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
                       <br>
                     </div>
@@ -185,13 +178,16 @@
                 <input type="hidden" name="timestamp" id="timestamp" placeholder="timestamp">
                 <input type="hidden" id="image1" name="image1">
                 
-              
+             
                 <div id="longlatidiv"><p id="longlati"></p></div>
                 <lable>2. Dia chi</lable><br><br>
-                <input type="text" name="street"  id="staddress" placeholder="Đường">
-                <input type="text" name="city"  id="city" placeholder=" Quận/Huyện">
-                <input type="text" name="provice"  id="state" placeholder=" Tỉnh">
-                
+                <input type="text" name="staddress"  id="staddress" placeholder="Street Address">
+                <input type="text" name="city"  id="city" placeholder=" city">
+                <input type="text" name="state"  id="state" placeholder=" state">
+                <input type="text" name="zip"  id="zip" placeholder=" zip">
+                <input type="text" name="county" id="county" placeholder=" county">
+                <input type="text" name="country"  id="country" placeholder=" country"><hr>
+               
                <hr>
                 
                 <lable>3 PROPERTY FEATURES...</lable><br><br>
@@ -204,7 +200,7 @@
                 <lable>4. AREA / PRICE / DESCRIPTION...</lable><br><br>
                 <input type="text" name="area" value="" id="area" placeholder="Area in sq feets">
                 <input type="text" name="cost"  id="cost" placeholder="Price in USD">
-                <input type="text" name="dis" value="" id="discription"   placeholder="Discription"><hr>
+                <input type="text" name="discription" value="" id="discription"   placeholder="Discription"><hr>
                 </fieldset>
                 <input type="submit" id="submitForm" style="display: none;" value="Actual Post Add">
               </form>
@@ -263,21 +259,21 @@
   <!-- jQuery library -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
-  <script src="/js/jquery.min.js"></script>   
+  <script src="/theme/js/jquery.min.js"></script>   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="/js/bootstrap.js"></script>   
+  <script src="/theme/js/bootstrap.js"></script>   
   <!-- slick slider -->
      <input type="hidden" id="longLatCurrenttask" value="RE-POSTADD">
   <script type="text/javascript" src="/theme/js/navigator.js"></script>
-  <script type="text/javascript" src="/js/slick.js"></script>
+  <script type="text/javascript" src="/theme/js/slick.js"></script>
   <!-- Price picker slider -->
-  <script type="text/javascript" src="/js/nouislider.js"></script>
+  <script type="text/javascript" src="/theme/js/nouislider.js"></script>
   
   <script type="text/javascript" src="/js/jquery.mixitup.js"></script>
   <!-- Add fancyBox -->        
   <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
   <!-- Custom js -->
-  <script src="/js/custom.js"></script> 
+  <script src="/theme/js/custom.js"></script> 
     <script type="text/javascript" src="/theme/js/postadd.js"></script>
 
 
