@@ -6,6 +6,7 @@ var bcrypt = require('bcryptjs');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../model/User.js')
 
+
 /* GET users listing. */
 
 
@@ -63,6 +64,8 @@ router.get('/login', function(req,res,next){
 		messages: messages
 	})
 })
+
+//login
 router.post('/login', function(req,res,next){
 	passport.authenticate('local-login',{successRedirect:'/',failureRedirect:'/users/login',failureFlash:true})(req, res,next)
  
@@ -80,7 +83,7 @@ passport.deserializeUser(function(id, done) {
 	done(err, user); 
 	}); 
 }); 
-
+//function local-login
 passport.use('local-login',new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
@@ -103,4 +106,48 @@ passport.use('local-login',new LocalStrategy({
   });
 }));
 
+//user update
+router.get('/update/:id',person,function(req,res,next){
+
+		res.render("user/resgiter",{user : req.user ? req.user : undefined})
+
+})
+
+
+router.post('/update/:id', function(req,res,next){
+	newvalue = {
+		$set:
+		{
+			name: req.body.name,
+			address : req.body.address,
+			phone : req.body.phone,
+			email: req.body.email,
+			password: req.body.password
+		}
+	}
+	User.updateOne({_id: req.params.id},newvalue,function(err,data){
+		if (err) throw err;
+		console.log(data)
+	})
+	res.location('/');
+	res.redirect('/');
+})
+//logout
+router.get('/logout',function(req,res){    
+	req.session.destroy(function(err){  
+			if(err){  
+					console.log(err);  
+			}  
+			else  
+			{  
+					res.redirect('/');  
+			}  
+	});  
+})
+function person(req,res,next){
+	if(req.isAuthenticated() && "option1"==req.user.type) {
+		return next();}
+	res.redirect('/');
+	
+}
 module.exports = router;

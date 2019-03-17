@@ -1,0 +1,144 @@
+<% include ./head.ejs %>
+  <!-- End menu section -->
+  
+<section id="aa-properties">
+    <div class="container">
+      <div class="row">
+
+
+        <div class="col-md-8">
+          <div class="aa-properties-content" id="postform">            
+            <!-- Start properties content body -->
+
+  
+            <h3>POST NEW PROPERTY</h3>
+        
+               
+             
+
+           <form method="post" action="/landlord/postproperty/<%= user.id %>" enctype="multipart/form-data">
+                 <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
+                  
+                 
+                    <div class="input_fields_wrap1">
+                    <div>
+                      <input type="file" name="filename" id="f_1" class="f">
+                      <input type="file" name="filename" id="n_1" class="n">
+                      <input type="file" name="filename" id="l_1" class="l">
+                      <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
+                      <br>
+                    </div>
+                </div>
+                <hr>
+                <fieldset>
+                <lable>2. Tieu de</lable><br><br>
+                <input type="text" name="title" id="title"  placeholder="Title" required="true"><hr>
+                <input type="hidden" name="timestamp" id="timestamp" placeholder="timestamp">
+                <input type="hidden" id="image1" name="image1">
+                
+                <div id="floating-panel" style="display:none;">
+                  <input id="latlng" type="text" value="40.714224,-73.961452">
+                  <input id="submit" type="button" value="Reverse Geocode">
+                </div>
+                <% include ./map.ejs %>
+           
+              
+                <div id="longlatidiv"><p id="longlati"></p></div>
+                <lable>2. Dia chi</lable><br><br>
+                <input type="text" name="street"  id="staddress" placeholder="Đường">
+                <input type="text" name="city"  id="city" placeholder=" Quận/Huyện">
+                <input type="text" name="provice"  id="state" placeholder=" Tỉnh">
+                
+               <hr>
+                
+                <lable>3 PROPERTY FEATURES...</lable><br><br>
+                <div class="input_fields_wrap">
+                  <button class="add_field_button">Add More Fields</button><br><br>
+                  <div><input type="text" name="propertyfeatures"  placeholder="Property Feature"></div>
+                </div><br><br>
+
+
+                <lable>4. AREA / PRICE / DESCRIPTION...</lable><br><br>
+                <input type="text" name="area" value="" id="area" placeholder="Area in sq feets">
+                <input type="text" name="cost"  id="cost" placeholder="Price in USD">
+                <input type="text" name="dis" value="" id="discription"   placeholder="Discription"><hr>
+                </fieldset>
+                <input type="submit" id="submitForm" style="display: none;" value="Actual Post Add">
+              </form>
+              <input type="submit" value="Save Post" id="uploadimage"><div id="loader"></div>
+              <div id="showerror"></div>
+              <div id="lodardiv"></div>
+             
+              <div id="div5" style="display:none;">Submitting - Property : <b>DONE</b></div><br>
+             
+            </div>          
+          </div>
+         
+    
+                <!-- Start properties sidebar -->
+       <% include ../theme/propertybar.ejs %>
+      </div>
+      </div>
+      </section>        
+ 
+  <footer id="aa-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        <div class="aa-footer-area">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="aa-footer-left">
+               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="aa-footer-middle">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="aa-footer-right">
+                <a href="#">Home</a>
+                <a href="#">Support</a>
+                <a href="#">License</a>
+                <a href="#">FAQ</a>
+                <a href="#">Privacy & Term</a>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </footer>
+  <!-- / Footer -->
+
+ 
+  
+  <!-- jQuery library -->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
+  <script src="/js/jquery.min.js"></script>   
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.js"></script>   
+  <!-- slick slider -->
+     <input type="hidden" id="longLatCurrenttask" value="RE-POSTADD">
+  <script type="text/javascript" src="/theme/js/navigator.js"></script>
+  <script type="text/javascript" src="/js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="/js/nouislider.js"></script>
+  
+  <script type="text/javascript" src="/js/jquery.mixitup.js"></script>
+  <!-- Add fancyBox -->        
+  <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
+  <!-- Custom js -->
+  <script src="/js/custom.js"></script> 
+    <script type="text/javascript" src="/theme/js/postadd.js"></script>
+
+
+  </body>
+</html>
