@@ -8,17 +8,9 @@ router.get('/', function(req, res, next) {
 		// console.log(req.user);
  	res.render('admin/index',{user : req.user ? req.user : undefined});
  	}
- 	if(req.isAuthenticated() && 'option1' == req.user.type ){
-  	 // console.log(req.user.isAdmin);
-	 console.log("true2"); 
-	 Property.find({status:"1"},function(e,pro){
-
-		res.render('landlord/index', {user : req.user ? req.user : undefined, property: pro});
-	 })
  	
-	}
 
- 	else if(req.isAuthenticated() && 'option2' === req.user.type  ){
+ 	else if(req.isAuthenticated() && 'user' === req.user.type  ){
  	res.render('user/index', {user : req.user ? req.user : undefined});	
 	}
 	else{

@@ -43,7 +43,7 @@ router.post('/resgiter',function(req,res,next){
 			phone: req.body.phone,
 			email : req.body.email,
 			password : req.body.password,
-			type: req.body.exampleRadios,
+			type: 'user',
 				});
 
 			bcrypt.genSalt(10,function(err,salt){
@@ -145,7 +145,7 @@ router.get('/logout',function(req,res){
 	});  
 })
 function person(req,res,next){
-	if(req.isAuthenticated() && "option1"==req.user.type) {
+	if(req.isAuthenticated() && "user"==req.user.type) {
 		return next();}
 	res.redirect('/');
 	

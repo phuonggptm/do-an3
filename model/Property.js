@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var Property = mongoose.Schema({
-    own: {type:String},
+   
     img : {type: Array},
     address: {type:String},
     area: {type: String},

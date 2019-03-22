@@ -25,7 +25,7 @@ const upload = multer({
 // Creatr property
 router.get("/creatproperty", auto, function(req,res,next){
   Property.find({status:"1"},function(e,pro){
-    res.render("landlord/create_pro",{ property:pro,user : req.user ? req.user : undefined})
+    res.render("admin/create_pro",{ property:pro,user : req.user ? req.user : undefined})
   })
 })
 router.post("/postproperty/:id",upload.array('filename',3),function(req,res,next){
@@ -34,7 +34,7 @@ router.post("/postproperty/:id",upload.array('filename',3),function(req,res,next
       img.push(file.filename)
   })
   var newPro = new Property({
-      own: req.params.id,
+     
       img: img,
       title : req.body.title,
       address: req.body.street + " " + req.body.city + " " + req.body.provice,
@@ -59,14 +59,14 @@ router.get('/:id',auto,function(req,res,next){
        console.log(status);  
      Property.find({}).skip(0).sort({price: -1}).limit(5).exec(function (err, latestproperty) {
        console.log(latestproperty)
-    res.render("landlord/list_pro.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty, user : req.user ? req.user : undefined});
+    res.render("admin/list_pro.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty, user : req.user ? req.user : undefined});
     })    
     })
   })
 })
 //check isAuthenticated
 function auto(req,res,next){
-	if(req.isAuthenticated() && "option1"==req.user.type) {
+	if(req.isAuthenticated() && "admin"==req.user.type) {
 		return next();}
 	res.redirect('/');
 	
