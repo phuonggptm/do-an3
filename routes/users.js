@@ -43,7 +43,7 @@ router.post('/resgiter',function(req,res,next){
 			phone: req.body.phone,
 			email : req.body.email,
 			password : req.body.password,
-			type: 'user',
+			type: 'users',
 				});
 
 			bcrypt.genSalt(10,function(err,salt){

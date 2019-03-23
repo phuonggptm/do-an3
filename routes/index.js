@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 	console.log(req.isAuthenticated());
 	if(req.isAuthenticated() && (  'admin' === req.user.type)){
 		// console.log(req.user);
- 	res.render('admin/index',{user : req.user ? req.user : undefined});
+ 	res.render('admin/index',{user : req.user ? req.user : undefined, pro:undefined});
  	}
  	
 

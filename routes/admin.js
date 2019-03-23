@@ -23,12 +23,12 @@ const upload = multer({
 });
 
 // Creatr property
-router.get("/creatproperty", auto, function(req,res,next){
-  Property.find({status:"1"},function(e,pro){
-    res.render("admin/create_pro",{ property:pro,user : req.user ? req.user : undefined})
+router.get("/list_product", auto, function(req,res,next){
+  Property.find(function(e,pro){
+    res.render("admin/list_product",{ property:pro,user : req.user ? req.user : undefined})
   })
 })
-router.post("/postproperty/:id",upload.array('filename',3),function(req,res,next){
+router.post("/create",upload.array('filename',2),function(req,res,next){
   var img =[];
   req.files.forEach(function(file){
       img.push(file.filename)
@@ -37,11 +37,12 @@ router.post("/postproperty/:id",upload.array('filename',3),function(req,res,next
      
       img: img,
       title : req.body.title,
-      address: req.body.street + " " + req.body.city + " " + req.body.provice,
-      area : req.body.area,
-      price: req.body.cost,
+      name: req.body.name,
+      type: req.body.type,
+      size: req.body.name,
+      price: req.body.price,
       dis: req.body.dis,
-      status: "0"
+      num: req.body.Number
   })
   newPro.save()
   
@@ -50,20 +51,7 @@ router.post("/postproperty/:id",upload.array('filename',3),function(req,res,next
 
 //Display Property
 
-router.get('/:id',auto,function(req,res,next){
 
-  var pageno = Number(req.params.id);  
-  Property.find({}).skip(pageno*6).sort({price: -1}).limit(6).exec(function (err, docs) {
-    Property.countDocuments(function(err, count) {
-      var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
-       console.log(status);  
-     Property.find({}).skip(0).sort({price: -1}).limit(5).exec(function (err, latestproperty) {
-       console.log(latestproperty)
-    res.render("admin/list_pro.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty, user : req.user ? req.user : undefined});
-    })    
-    })
-  })
-})
 //check isAuthenticated
 function auto(req,res,next){
 	if(req.isAuthenticated() && "admin"==req.user.type) {

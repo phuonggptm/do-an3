@@ -1,64 +1,262 @@
-<% include head.ejs %>
-  <!-- End menu section -->
- Xin chao
-  <footer id="aa-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <div class="aa-footer-area">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-left">
-               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
-              </div>
+<%include ../partials/menu %>
+<div class="col-lg-9">
+<% if(pro == undefined){ %>
+    <form method="post" class="form-horizontal" id="insert_form" action="/admin/create"  enctype="multipart/form-data" data-toggle="validator">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <div class="pull-right">
+                    <button id="frm_edit_product_save" class="btn btn-success" type="submit">Add product <i class="fa fa-plus"></i></button>
+                </div>
+                <h2>New product</h2>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
-              </div>
+            <div class="form-group">
+                <label for="frmProductTitle" class="col-sm-2 control-label">Chủ đề *</label>
+                <div class="col-sm-10">
+                    <input type="text"  name="title" class="form-control" minlength="5" maxlength="200" value="" required/>
+                </div>
             </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="aa-footer-right">
-                <a href="#">Home</a>
-                <a href="#">Support</a>
-                <a href="#">License</a>
-                <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a>
-              </div>
-            </div>            
+            <div class="form-group">
+                <label for="frmProductPrice" class="col-sm-2 control-label">Giá Sản phẩm *</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">đ</span>
+                        <input type="number" name="price" class="form-control" step="any" value="" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="frmProductPublished" class="col-sm-2 control-label">Trạng thái</label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="frmProductPublished" name="status">
+                        <option value="true" selected>Hết hàng</option>
+                        <option value="false">Còn hàng</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" id="editor-wrapper">
+                <label for="editor" class="col-sm-2 control-label">Mô tả *</label>
+                <div class="col-sm-10">
+                    <textarea id="editor" minlength="5" rows="10" name="dis" class="form-control" required></textarea>
+                </div>
+            </div>
+           
+            
+            <div class="form-group">
+                <input type="hidden" id="productOptJson" name="productOptJson" value="" />
+                <label for="editor" class="col-sm-2 control-label">Chi tiết</label>
+                <div class="col-lg-10">
+                    <ul class="list-group" id="product_opt_wrapper">
+                        <li class="list-group-item">
+                            <div class="row">
+                            <div class="col-lg-2">
+                                <strong>Tên:</strong>
+                                <input type="text" name="name" class="form-control" placeholder="Tên sản phâme" />
+                            </div>
+                            <div class="col-lg-2">
+                                <strong>Loại:</strong>
+                                <input type="text" name="type" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="col-lg-2">
+                                <strong>Size:</strong>
+                                <select id="product_optType" class="form-control" name="sze">
+                                    <option value="select">S</option>
+                                    <option value="radio">M</option>
+                                    <option value="checkbox">L</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <strong>Số lượng</strong>
+                                <input type="num" name="num" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="col-lg-2 text-right"></br>
+                                <button id="product_opt_add" class="btn btn-success">Add</button>
+                            </div>
+                          </div>
+                        </li>
+      
+                    </ul>
+                   
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" id="productOptJson" name="productOptJson" value="result.productOptions" />
+                <label for="editor" class="col-sm-2 control-label">Image:</label>
+                <div class="col-lg-10">
+                    <ul class="list-group" id="product_opt_wrapper">
+                        <li class="list-group-item">
+                            <div class="row">
+                            <div class="col-lg-2" >
+                                <input type="file" name="filename" id="f_1" class="f">
+                            </div>
+                            <div class="col-lg-4" id="file"></div>
+                            <input type="file" name="filename">
+                          </div>
+                        </li>                     
+                    </ul>
+                   
+                </div> 
           </div>
+            <div class="form-group">
+                <label for="frmProductTags" class="col-sm-2 control-label">Product tag words</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="frmProductTags" name="frmProductTags">
+                    <p class="help-block">Tag words used to indexed products, making them easier to find and filter.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      </div>
-    </div>
-  </footer>
-  <!-- / Footer -->
-
- 
-  
-  <!-- jQuery library -->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-
-  <script src="/js/jquery.min.js"></script>   
+    </form>
+   
+    
+    <% }else { %>
+        <form method="post" class="form-horizontal" id="insert_form" action="/admin/create"  enctype="multipart/form-data" data-toggle="validator">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <div class="pull-right">
+                        <button id="frm_edit_product_save" class="btn btn-success" type="submit">Add product <i class="fa fa-plus"></i></button>
+                    </div>
+                    <h2>New product</h2>
+                </div>
+                <div class="form-group">
+                    <label for="frmProductTitle" class="col-sm-2 control-label">Chủ đề *</label>
+                    <div class="col-sm-10">
+                        <input type="text"  name="title" class="form-control" minlength="5" maxlength="200" value="<%= pro.title %>" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="frmProductPrice" class="col-sm-2 control-label">Giá Sản phẩm *</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">đ</span>
+                            <input type="number" name="price" class="form-control" step="any" value="<%= pro.price %>" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="frmProductPublished" class="col-sm-2 control-label">Trạng thái</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="frmProductPublished" name="status">
+                            <option value="true" selected>Hết hàng</option>
+                            <option value="false">Còn hàng</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="editor-wrapper">
+                    <label for="editor" class="col-sm-2 control-label">Mô tả *</label>
+                    <div class="col-sm-10">
+                        <textarea id="editor" minlength="5" rows="10" name="dis" class="form-control" required><%= pro.dis %></textarea>
+                    </div>
+                </div>
+               
+                
+                <div class="form-group">
+                    <input type="hidden" id="productOptJson" name="productOptJson" value="result.productOptions" />
+                    <label for="editor" class="col-sm-2 control-label">Chi tiết</label>
+                    <div class="col-lg-10">
+                        <ul class="list-group" id="product_opt_wrapper">
+                            <li class="list-group-item">
+                                <div class="row">
+                                <div class="col-lg-2">
+                                    <strong>Tên:</strong>
+                                    <input type="text" name="name" class="form-control" value="<%= pro.name %>" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Loại:</strong>
+                                    <input type="text" name="type" class="form-control" value="<%= pro.type %>"/>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Size:</strong>
+                                    <select id="product_optType" class="form-control" name="size" aria-valuetext="<%= pro.size %>">
+                                        <option value="select">S</option>
+                                        <option value="radio">M</option>
+                                        <option value="checkbox">L</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <strong>Số lượng</strong>
+                                    <input type="number" name="num" class="form-control" value="<%= pro.num %>">
+                                </div>
+                                <div class="col-lg-2 text-right"></br>
+                                    <button id="product_opt_add" class="btn btn-success">Add</button>
+                                </div>
+                              </div>
+                            </li>
+          
+                        </ul>
+                       
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <input type="hidden" id="productOptJson" name="productOptJson" value="result.productOptions" />
+                    <label for="editor" class="col-sm-2 control-label">Image:</label>
+                    <div class="col-lg-10">
+                        <ul class="list-group" id="product_opt_wrapper">
+                            <li class="list-group-item">
+                                <div class="row">
+                                <div class="col-lg-2" >
+                                    <input type="file" name="filename" id="f_1" class="f" value="<%= pro.img[0] %>">
+                                </div>
+                                <div class="col-lg-4" id="file" ></div>
+                                <input type="file" name="filename" src="/uploads/<%= pro.img[1] %>">
+                              </div>
+                            </li>                     
+                        </ul>
+                       
+                    </div> 
+              </div>
+                <div class="form-group">
+                    <label for="frmProductTags" class="col-sm-2 control-label">Product tag words</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="frmProductTags" name="frmProductTags">
+                        <p class="help-block">Tag words used to indexed products, making them easier to find and filter.</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <% } %>
+    
+</div>
+</body>
+<script src="/js/jquery.min.js"></script>   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+  </script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
   <script src="/js/bootstrap.js"></script>   
   <!-- slick slider -->
-     <input type="hidden" id="longLatCurrenttask" value="RE-POSTADD">
   <script type="text/javascript" src="/theme/js/navigator.js"></script>
   <script type="text/javascript" src="/js/slick.js"></script>
   <!-- Price picker slider -->
   <script type="text/javascript" src="/js/nouislider.js"></script>
-  
+
   <script type="text/javascript" src="/js/jquery.mixitup.js"></script>
   <!-- Add fancyBox -->        
   <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
   <!-- Custom js -->
   <script src="/js/custom.js"></script> 
-    <script type="text/javascript" src="/theme/js/postadd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#editor').summernote({
+            height: 300,
+            minHeight: null,
+           
+            toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']]
+  ]
+    });
+        });
+  
+</script>
 
-  </body>
 </html>

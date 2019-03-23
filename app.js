@@ -23,6 +23,7 @@ const { document } = (new JSDOM('')).window;
 global.document = document;
 var $ = require("jquery")(window);
 var indexRouter = require('./routes/index');
+var productRouter = require('./routes/product');
 var usersRouter = require('./routes/users');
 var landlordRouter = require('./routes/admin');
 const ejsLint = require('ejs-lint');
@@ -86,6 +87,7 @@ app.use(session({
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   app.use('/admin', landlordRouter);
+  app.use('/product',productRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

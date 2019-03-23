@@ -3,11 +3,13 @@ var mongoose = require("mongoose");
 var Property = mongoose.Schema({
    
     img : {type: Array},
-    address: {type:String},
-    area: {type: String},
+    num: {type:Number},
+    name: {type: String},
+    type: {type: String},
+    size: {type: String},
     price: {type: Number },
     dis : {type: String},
-    status: {type: String}
+    title: {type: String}
 
 })
 
