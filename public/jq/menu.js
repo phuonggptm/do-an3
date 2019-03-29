@@ -1,8 +1,51 @@
+
 class Menu extends React.Component{
     constructor(props) {
         super(props);
         this.create = this.create.bind(this)
+        this.list = this.list.bind(this)
+        this.state = {
+            pro : []
+        }
+
         
+        
+    }
+   
+    list(){
+        var that = this
+        $.post('/admin/list_product',function(pro){
+         
+            that.setState({pro:pro})
+        })
+        
+       
+        ReactDOM.render(
+            <section id="aa-agents">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="aa-agents-area">
+            <div className="aa-title">
+              <h2>Our Agents</h2>
+              <span></span>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
+            </div>
+        <  div className="aa-agents-content">
+        <ul className="aa-agents-slider">
+        
+        
+        { this.state.pro.map(function(node,index){
+           return <List key = { index} id={index} img ={node.img[0]} title = {node.title}></List>
+        })}
+
+        </ul>
+        </  div>
+        </div>
+        </  div>
+        </div>
+        </div>
+        </section>, document.getElementById("div9"))
     }
 
     render(){
@@ -13,7 +56,7 @@ class Menu extends React.Component{
         <li className="list-group-item"><i className="fa fa-plus-square-o fa-icon" aria-hidden="true"></i> &nbsp; <button onClick={this.create}>New</button></li>
        
       
-        <li className="list-group-item"><i className="fa fa-list fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/list_product">List</a></li>
+        <li className="list-group-item"><i className="fa fa-list fa-icon" aria-hidden="true"></i> &nbsp; <button onClick={this.list}>List</button></li>
         <li className="list-group-item"><strong>Orders</strong></li>
         <li className="list-group-item"><i className="fa fa-cube fa-icon" aria-hidden="true"></i> &nbsp; <a href="/admin/orders">List</a></li>
         <li className="list-group-item"><strong>Customers</strong></li>
@@ -33,23 +76,57 @@ class Menu extends React.Component{
         )
     }
     create(){
-      ReactDOM.render(<Create/>, document.getElementById("div9"))
+      ReactDOM.render(<Create product="New Product" button="Add Product"></Create>, document.getElementById("div9"))
 
    
     
 }
 }
 
-class Create extends React.Component{
+
+class List extends React.Component{
+    constructor(props) {
+        super(props);
+       
+        
+    }
+   
+
     render(){
         return(
-            <form method="post" className="form-horizontal" id="insert_form" action="/admin/create" enctype="multipart/form-data">
+          
+            <li>
+            <div className="aa-single-agents">
+              <div className="aa-agents-img">
+                <img src={"/uploads/"+ this.props.img} alt="agent member image"/>
+              </div>
+              <div className="aa-agetns-info">
+                <h4><a href="#"> {this.props.title}</a></h4>
+                
+              </div>
+            </div>
+          </li>
+        
+        )
+    }
+    
+}
+
+class Create extends React.Component{
+    constructor(props) {
+        super(props);
+      
+    }
+   
+    render(){
+        return(
+            <form method="post" className="form-horizontal" id="insert_form" action="/admin/create" encType="multipart/form-data">
             <div className="col-lg-12">
                 <div className="page-header">
                     <div className="pull-right">
-                        <button id="frm_edit_product_save" className="btn btn-success" type="submit">Add product <i className="fa fa-plus"></i></button>
+                        <button id="frm_edit_product_save" className="btn btn-success" type="submit">{this.props.button} <i className="fa fa-plus"></i></button>
                     </div>
-                    <h2>New product</h2>
+                    <h2>{this.props.product}</h2>
                 </div>
                 <div className="form-group">
                     <label htmlFor="frmProductTitle" className="col-sm-2 control-label">Product title *</label>
@@ -62,19 +139,11 @@ class Create extends React.Component{
                     <div className="col-sm-6">
                         <div className="input-group">
                             <span className="input-group-addon">$</span>
-                            <input type="number" name="price" className="form-control" step="1000" />
+                            <input type="number" name="price" className="form-control"  />
                         </div>
                     </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="frmProductPublished" className="col-sm-2 control-label">Status</label>
-                    <div className="col-sm-6">
-                        <select className="form-control" id="frmProductPublished" name="Status">
-                            <option value="true" selected>Published</option>
-                            <option value="false">Draft</option>
-                        </select>
-                    </div>
-                </div>
+                
                 <div className="form-group" id="editor-wrapper">
                     <label htmlFor="editor" className="col-sm-2 control-label">Product description *</label>
                     <div className="col-sm-10">
@@ -111,24 +180,24 @@ class Create extends React.Component{
                                     <input type="number" id="product_optOptions" name ="num"className="form-control" placeholder="comma, seporated, list"/>
                                 </div>
                                 <div className="col-lg-2 text-right"><br/>
-                                    <button id="product_opt_add" className="btn btn-success">Add</button>
+                                    <button id="product_opt_add" className="btn btn-success">{this.props.button}</button>
                                 </div></div>
                             </li>                        
                         </ul>
                        
                     </div>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                 <input type="hidden" id="productOptJson" name="productOptJson" value="result.productOptions" />
                 <label htmlFor="editor" className="col-sm-2 control-label">Image:</label>
-                <div class="col-lg-10">
-                    <ul class="list-group" id="product_opt_wrapper">
-                        <li class="list-group-item">
-                            <div class="row">
-                            <div class="col-lg-2" >
-                                <input type="file" name="filename" id="f_1" class="f"/>
+                <div className="col-lg-10">
+                    <ul className="list-group" id="product_opt_wrapper">
+                        <li className="list-group-item">
+                            <div className="row">
+                            <div className="col-lg-2" >
+                                <input type="file" name="filename" id="f_1" className="f"/>
                             </div>
-                            <div class="col-lg-4" id="file"></div>
+                            <div className="col-lg-4" id="file"></div>
                             <input type="file" name="filename"/>
                           </div>
                         </li>                     
@@ -137,7 +206,7 @@ class Create extends React.Component{
                 </div> 
           </div>
                 <div className="form-group">
-                    <label for="frmProductTags" className="col-sm-2 control-label">Product tag words</label>
+                    <label htmlFor="frmProductTags" className="col-sm-2 control-label">Product tag words</label>
                     <div className="col-sm-10">
                         <input type="text" className="form-control" id="frmProductTags" name="frmProductTags"/>
                         <p className="help-block">Tag words used to indexed products, making them easier to find and filter.</p>
@@ -147,6 +216,8 @@ class Create extends React.Component{
         </form>)
         
     }
+
+   
 }
 
 ReactDOM.render(<Menu/>, document.getElementById("menu"))
