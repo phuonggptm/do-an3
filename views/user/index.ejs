@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,8 +23,7 @@
 
     <!-- Main style sheet -->
     <link href="/css/style1.css" rel="stylesheet">    
-    <link rel="stylesheet" href="/theme/css/postadd.css">
-    
+
    
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
@@ -65,10 +65,20 @@
                   </div>
                 </div>              
               </div>
+              
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a href="/users/resgiter" class="aa-register">Register</a>
-                  <a href="/users/login" class="aa-login">Login</a>
+                    <ul className="nav navbar-nav navbar-right">
+                        <% if(user){ %>
+                          <a href="/users/resgiter" class="aa-register">Register</a>
+                          <a href="/users/login" class="aa-login">Login</a>
+                            <% } else{ %>
+                          <li><a href="/cart" className="menu-btn"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span className="badge" id="cart-count"></span></a></li>
+                                                
+                          <li><a href="/users/logout"><i className="fa fa-sign-out" aria-hidden="true"> </i>Logout</a></li>
+                        <% } %>
+                     
+                    </ul>
                 </div>
               </div>
             </div>
@@ -93,21 +103,21 @@
           </button>
           <!-- LOGO -->                                               
           <!-- Text based logo -->
-           <a class="navbar-brand aa-logo" href="index.html"> Home <span>Property</span></a>
+           <a class="navbar-brand aa-logo" href="/"> Home <span>Property</span></a>
            <!-- Image based logo -->
            <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="/img/logo.png" alt="logo"></a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-            <li class="active"><a href="index.html">HOME</a></li>
+            <li class="active"><a href="/">HOME</a></li>
              <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/product/">Danh mục sản phẩm<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="properties.html">PROPERTIES</a></li>
-                <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
+                <li><a href="/product">Quần </a></li>
+                <li><a href="/product">áo</a></li>                                            
               </ul>
             </li>
-            <li><a href="gallery.html">GALLERY</a></li>                                         
+            <li><a href="/user">GALLERY</a></li>                                         
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
@@ -123,6 +133,7 @@
     </nav> 
   </section>
   <!-- End menu section -->
+  <!-- Start slider  -->
   <section id="aa-slider">
     <div class="aa-slider-area"> 
       <!-- Top slider -->
@@ -131,93 +142,423 @@
         <div class="aa-top-slider-single">
           <img src="/img/slider/1.jpg" alt="img">
           <!-- Top slider content -->
-          <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
-          </div>
+  
           <!-- / Top slider content -->
         </div>
+        <!-- / Top slider single slide -->
+        <!-- Top slider single slide -->
+        <div class="aa-top-slider-single">
+          <img src="/img/slider/2.jpg" alt="img">
+          <!-- Top slider content -->
+          
         </div>
+        <div class="aa-top-slider-single">
+          <img src="/img/slider/1.jpg" alt="img">
+    
+          <!-- / Top slider content -->
         </div>
-        </section>
-<section id="aa-properties">
+      </div>
+    </div>
+  </section>
+  <!-- End slider  -->
+
+
+ 
+  <!-- Advance Search -->
+  <section id="aa-advance-search">
+    <div class="container">
+      <div class="aa-advance-search-area">
+        <div class="form">
+         <div class="aa-advance-search-top">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="aa-single-advance-search">
+                  <input type="text" placeholder="Type Your Location">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="aa-single-advance-search">
+                
+                   
+              </div>
+              </div>
+              <div class="col-md-2">
+                <div class="aa-single-advance-search">
+                  <input class="aa-search-btn" type="submit" value="Search">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Advance Search -->
+
+  <section id="aa-agents">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-agents-area">
+              <div class="aa-title">
+                <h2>Sản phẩm đặc trưng</h2>
+                <span></span>
+                <p>Luôn mang lại sự thoải mái, tự tin cho khách  hàng</p>
+              </div>
+              <!-- agents content -->
+              <div class="aa-agents-content">
+                <ul class="aa-agents-slider">
+                  <% all.forEach(function(dt){ %>
+                  <li>
+                    <div class="aa-single-agents">
+                      <div class="aa-agents-img">
+                        <img src="/uploads/<%= dt.img[0] %>" alt="agent member image">
+                      </div>
+                      <div class="aa-agetns-info">
+                       
+                        <div class="aa-agent-social">
+                          <a href="/product/addCart/<%= dt._id %>"><i class="fa fa-facebook"></i></a>
+                          <a href="#"><i class="fa fa-twitter"></i></a>
+                          <a href="#"><i class="fa fa-linkedin"></i></a>
+                          <a href="#"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% }) %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Service section -->
+  <section id="aa-service">
     <div class="container">
       <div class="row">
-
-        <div class="col-md-8">
-          <div class="aa-properties-content" id="postform">            
-            <!-- Start properties content body -->
-
-  
-            <h3>POST NEW PROPERTY</h3>
-        
-               
-             
-
-           <form method="post" action="postproperty" enctype="multipart/form-data">
-                 <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
-                  <button class="add_field_button1">Add More Images</button><br><br>
-                 
-                    <div class="input_fields_wrap1">
-                    <div>
-                      <input type="file" name="file" id="f_1" class="f">
-                      <input type="hidden" name="filename" id="n_1" class="n">
-                      <input type="hidden" name="filelinks" id="l_1" class="l">
-                      <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
-                      <br>
+        <div class="col-md-12">
+          <div class="aa-service-area">
+            <div class="aa-title">
+              <h2>Thông tin</h2>
+              
+            </div>
+            <!-- service content -->
+            <div class="aa-service-content">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="aa-single-service">
+                    <div class="aa-service-icon">
+                      <span class="fa fa-home"></span>
                     </div>
+                    <div class="aa-single-service-content">
+                      <h4><a href="#">Property Sale</a></h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                    </div>
+                  </div>
                 </div>
-                <hr>
-                <fieldset>
-                <lable>2. Tieu de</lable><br><br>
-                <input type="text" name="title" id="title"  placeholder="Title" required="true"><hr>
-                <input type="hidden" name="timestamp" id="timestamp" placeholder="timestamp">
-                <input type="hidden" id="image1" name="image1">
-                
-             
-                <div id="longlatidiv"><p id="longlati"></p></div>
-                <lable>2. Dia chi</lable><br><br>
-                <input type="text" name="staddress"  id="staddress" placeholder="Street Address">
-                <input type="text" name="city"  id="city" placeholder=" city">
-                <input type="text" name="state"  id="state" placeholder=" state">
-                <input type="text" name="zip"  id="zip" placeholder=" zip">
-                <input type="text" name="county" id="county" placeholder=" county">
-                <input type="text" name="country"  id="country" placeholder=" country"><hr>
-               
-               <hr>
-                
-                <lable>3 PROPERTY FEATURES...</lable><br><br>
-                <div class="input_fields_wrap">
-                  <button class="add_field_button">Add More Fields</button><br><br>
-                  <div><input type="text" name="propertyfeatures"  placeholder="Property Feature"></div>
-                </div><br><br>
-
-
-                <lable>4. AREA / PRICE / DESCRIPTION...</lable><br><br>
-                <input type="text" name="area" value="" id="area" placeholder="Area in sq feets">
-                <input type="text" name="cost"  id="cost" placeholder="Price in USD">
-                <input type="text" name="discription" value="" id="discription"   placeholder="Discription"><hr>
-                </fieldset>
-                <input type="submit" id="submitForm" style="display: none;" value="Actual Post Add">
-              </form>
-              <input type="submit" value="Save Post" id="uploadimage"><div id="loader"></div>
-              <div id="showerror"></div>
-              <div id="lodardiv"></div>
-              <div id="div1" style="display:none;">Upload image 1: <b>Successfull</b></div>
-              <div id="div2" style="display:none;">Upload image 2: <b>Successfull</b></div>
-              <div id="div3" style="display:none;">Upload image 3: <b>Successfull</b></div>
-              <div id="div4" style="display:none;">Upload image 4: <b>Successfull</b></div>
-              <div id="div5" style="display:none;">Submitting - Property : <b>DONE</b></div><br>
-             
-            </div>          
+                <div class="col-md-3">
+                  <div class="aa-single-service">
+                    <div class="aa-service-icon">
+                      <span class="fa fa-check"></span>
+                    </div>
+                    <div class="aa-single-service-content">
+                      <h4><a href="#">Property Rent</a></h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="aa-single-service">
+                    <div class="aa-service-icon">
+                      <span class="fa fa-crosshairs"></span>
+                    </div>
+                    <div class="aa-single-service-content">
+                      <h4><a href="#">Property Development</a></h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="aa-single-service">
+                    <div class="aa-service-icon">
+                      <span class="fa fa-bar-chart-o"></span>
+                    </div>
+                    <div class="aa-single-service-content">
+                      <h4><a href="#">Market Analysis</a></h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Service section -->
+
+  <!-- Promo Banner Section -->
+  <section id="aa-promo-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-promo-banner-area">
+            <h3>Sản phẩm bán chạy nhất </h3>
+            <p><%= best.title %></p>
+            <a href="#" class="aa-view-btn">View Details</a>
           </div>
-         
-</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Promo Banner Section -->
+
+  <!-- Our Agent Section-->
+ 
+  <!-- / Our Agent Section-->
+
+  <!-- Client Testimonial -->
+  <section id="aa-client-testimonial">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-client-testimonial-area">
+            <div class="aa-title">
+              <h2>What Client Say</h2>
+              <span></span>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus eaque quas debitis animi ipsum, veritatis!</p>
+            </div>
+            <!-- testimonial content -->
+            <div class="aa-testimonial-content">
+              <!-- testimonial slider -->
+              <ul class="aa-testimonial-slider">
+                <li>
+                  <div class="aa-testimonial-single">
+                    <div class="aa-testimonial-img">
+                      <img src="/img/testimonial-1.png" alt="testimonial img">
+                    </div>
+                    <div class="aa-testimonial-info">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
+                    </div>
+                    <div class="aa-testimonial-bio">
+                      <p>David Muller</p>
+                      <span>Web Designer</span>
+                    </div>
+                  </div>
+                </li>
+                 <li>
+                  <div class="aa-testimonial-single">
+                    <div class="aa-testimonial-img">
+                      <img src="/img/testimonial-3.png" alt="testimonial img">
+                    </div>
+                    <div class="aa-testimonial-info">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
+                    </div>
+                    <div class="aa-testimonial-bio">
+                      <p>David Muller</p>
+                      <span>Web Designer</span>
+                    </div>
+                  </div>
+                </li>
+                 <li>
+                  <div class="aa-testimonial-single">
+                    <div class="aa-testimonial-img">
+                      <img src="/img/testimonial-2.png" alt="testimonial img">
+                    </div>
+                    <div class="aa-testimonial-info">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
+                    </div>
+                    <div class="aa-testimonial-bio">
+                      <p>David Muller</p>
+                      <span>Web Designer</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Client Testimonial -->
+
+  <!-- Client brand -->
+  <section id="aa-client-brand">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-client-brand-area">
+            <ul class="aa-client-brand-slider">
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-1.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-2.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-3.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-5.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-4.png" alt="brand image">
+                </div>
+              </li>
+               <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-1.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-2.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-3.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-5.png" alt="brand image">
+                </div>
+              </li>
+              <li>
+                <div class="aa-client-single-brand">
+                  <img src="/img/client-brand-4.png" alt="brand image">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Client brand -->
+
+  <!-- Latest blog -->
+  <section id="aa-latest-blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-latest-blog-area">
+            <div class="aa-title">
+              <h2>Latest News</h2>
+              <span></span>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe magni, est harum repellendus. Accusantium, nostrum!</p>
+            </div>
+            <div class="aa-latest-blog-content">
+              <div class="row">
+                <!-- start single blog -->
+                <div class="col-md-4">
+                  <article class="aa-blog-single">
+                    <figure class="aa-blog-img">
+                      <a href="#"><img src="/img/blog-img-1.jpg" alt="img"></a>
+                      <span class="aa-date-tag">15 April, 16</span>
+                    </figure>
+                    <div class="aa-blog-single-content">
+                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <div class="aa-blog-single-bottom">
+                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
+                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      </div>
+                    </div>
+                   
+                  </article>
+                </div>
+                <!-- start single blog -->
+                <div class="col-md-4">
+                  <article class="aa-blog-single">
+                    <figure class="aa-blog-img">
+                      <a href="#"><img src="/img/blog-img-2.jpg" alt="img"></a>
+                      <span class="aa-date-tag">15 April, 16</span>
+                    </figure>
+                    <div class="aa-blog-single-content">
+                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <div class="aa-blog-single-bottom">
+                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
+                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      </div>
+                    </div>                   
+                  </article>
+                </div>
+                <!-- start single blog -->
+                <div class="col-md-4">
+                  <article class="aa-blog-single">
+                    <figure class="aa-blog-img">
+                      <a href="#"><img src="/img/blog-img-3.jpg" alt="img"></a>
+                      <span class="aa-date-tag">15 April, 16</span>
+                    </figure>
+                    <div class="aa-blog-single-content">
+                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <div class="aa-blog-single-bottom">
+                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
+                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      </div>
+                    </div>                   
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Latest blog -->
+  <section id="aa-about-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-about-us-area">
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="aa-about-us-left">
+                    <img src="/img/about-us.png" alt="image">
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="aa-about-us-right">
+                    <div class="aa-title">
+                      <h2></h2>
+                      <span></span>
+                    </div>
+                    <p></p>                  
+                    <ul>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>                    
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Footer -->
   <footer id="aa-footer">
     <div class="container">
       <div class="row">
@@ -231,7 +572,7 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="/addCart/:id"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-google-plus"></i></a>
                 <a href="#"><i class="fa fa-youtube"></i></a>
@@ -258,7 +599,6 @@
   
   <!-- jQuery library -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-
   <script src="/js/jquery.min.js"></script>   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/js/bootstrap.js"></script>   
@@ -272,8 +612,6 @@
   <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
   <!-- Custom js -->
   <script src="/js/custom.js"></script> 
-    <script type="text/javascript" src="/theme/js/postadd.js"></script>
-
 
   </body>
 </html>

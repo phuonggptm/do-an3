@@ -280,6 +280,9 @@ img {
 
 /*scrol to top*/
 
+a,p{
+  font-family:  Helvetica, sans-serif
+}
 .scrollToTop {
   bottom: 60px;
   color: #fff;

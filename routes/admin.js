@@ -23,7 +23,7 @@ const upload = multer({
 });
 
 // Creatr property
-router.get("/list_product", auto, function(req,res,next){
+router.get("/list_product", function(req,res,next){
   Property.find(function(e,pro){
     res.render("admin/list_product",{ property:pro,user : req.user ? req.user : undefined})
   })
