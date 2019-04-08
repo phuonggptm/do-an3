@@ -36,6 +36,11 @@
 */
 /* BASE - Base tyles, Variables, Mixins, etc. */
 
+
+.aa-footer-middle a i{
+  margin-right: 46px;
+}
+
 body {
   background-color: #ffffff;
   font-family: "Open Sans", sans-serif;
@@ -279,6 +284,7 @@ img {
 }
 
 /*scrol to top*/
+
 
 a,p{
   font-family:  Helvetica, sans-serif
@@ -907,7 +913,7 @@ a,p{
 ====================*/
 
 #aa-promo-banner {
-  background-image: url("../img/promo-banner.jpg");
+ 
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;

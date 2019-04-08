@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var random = require('mongoose-simple-random');
 var Property = require('../model/Property.js')
 
 /* GET home page. */
@@ -10,18 +11,13 @@ router.get('/', function(req, res, next) {
  	res.render('admin/create',{user : req.user ? req.user : undefined, pro:undefined});
  	}
  	
-
- 	else if(req.isAuthenticated() && 'users' === req.user.type  ){
-		 res.redirect('/user')
-		
-	}
 	else{
-		
-		console.log("trang chu");
-		res.render("index.ejs")
-		
+		Property.findRandom({}, {},{limit: 4},function(err,docs){
+			res.render('index', {title:'Shopping',products: docs,user : req.user ? req.user : undefined});
+		})
 	}
 })
+
 
 router.get('/admin', function(req,res,next){
 	res.render('admin/create')
@@ -29,8 +25,6 @@ router.get('/admin', function(req,res,next){
 
 
 router.get('/user',function(req,res,next){
-
-	
 	Property.find(function(er, dat){
 		if (er) throw er;
 		Property.find().sort('-price').limit(1).exec(function(er,price){
@@ -42,10 +36,5 @@ router.get('/user',function(req,res,next){
 	})
 	
 })	
-	
-	
-
-
-
 
 module.exports = router;

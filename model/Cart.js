@@ -5,7 +5,8 @@ function Cart (oldCart){
 		var giohang = this.items[id];
 
 		if(!giohang){
-			giohang = this.items[id] = {item: item, soluong: 0, tien: 0}
+			giohang = this.items[id] = 
+			{item: item, soluong: 0, tien: 0}
 		}
 		giohang.soluong++;
 		giohang.tien = giohang.soluong * giohang.item.price;

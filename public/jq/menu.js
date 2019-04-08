@@ -19,7 +19,7 @@ class Menu extends React.Component{
             that.setState({pro:pro})
         })
         
-       
+        ReactDOM.unmountComponentAtNode(document.getElementById('div9'))
         ReactDOM.render(
             <section id="aa-agents">
     <div className="container">

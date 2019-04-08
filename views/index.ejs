@@ -1,60 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Home Property | Home</title>
+  <% include ./theme/header.ejs %>
+   <% include ./theme/slide.ejs %>
+
     
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <link href="/css/font-awesome.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="/css/bootstrap.css" rel="stylesheet">   
-    <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="/css/slick.css">
-    <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="/css/nouislider.css">
-    <!-- Fancybox slider -->
-    <link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen" /> 
-    <!-- Theme color -->
-    <link id="switcher" href="/css/theme-color/default-theme.css" rel="stylesheet">     
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="title-section mb-5 col-12">
+            <h2 class="text-uppercase">Popular Products</h2>
+          </div>
+        </div>
+        <div class="row">
+          <% products.forEach(function(data){ %>
+          <div class="col-lg-4 col-md-6 item-entry mb-4">
+            <a href="#" class="product-item md-height bg-gray d-block">
+              <img src="/uploads/<%= data.img[0] %>" alt="Image" class="img-fluid">
+            </a>
+            <h2 class="item-title"><a href="/product/info/<%= data._id %>"><%= data.name %></a></h2>
+            <strong class="item-price"><del><%= data.price %></del> $28.00</strong>
+          </div>
 
-    <!-- Main style sheet -->
-    <link href="/css/style1.css" rel="stylesheet">    
+      <%  }) %>
 
-   
-    <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="title-section text-center mb-5 col-12">
+            <h2 class="text-uppercase">Most Rated</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 block-3">
+            <div class="nonloop-block-3 owl-carousel">
+              <div class="item">
+                <div class="item-entry">
+                  <a href="#" class="product-item md-height bg-gray d-block">
+                    <img src="images/model_1.png" alt="Image" class="img-fluid">
+                  </a>
+                  <h2 class="item-title"><a href="#">Smooth Cloth</a></h2>
+                  <strong class="item-price"><del>$46.00</del> $28.00</strong>
+                  <div class="star-rating">
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-entry">
+                  <a href="#" class="product-item md-height bg-gray d-block">
+                    <img src="images/prod_3.png" alt="Image" class="img-fluid">
+                  </a>
+                  <h2 class="item-title"><a href="#">Blue Shoe High Heels</a></h2>
+                  <strong class="item-price"><del>$46.00</del> $28.00</strong>
+
+                  <div class="star-rating">
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-entry">
+                  <a href="#" class="product-item md-height bg-gray d-block">
+                    <img src="images/model_5.png" alt="Image" class="img-fluid">
+                  </a>
+                  <h2 class="item-title"><a href="#">Denim Jacket</a></h2>
+                  <strong class="item-price"><del>$46.00</del> $28.00</strong>
+
+                  <div class="star-rating">
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                  </div>
+
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-entry">
+                  <a href="#" class="product-item md-height bg-gray d-block">
+                    <img src="images/prod_1.png" alt="Image" class="img-fluid">
+                  </a>
+                  <h2 class="item-title"><a href="#">Leather Green Bag</a></h2>
+                  <strong class="item-price"><del>$46.00</del> $28.00</strong>
+                  <div class="star-rating">
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-entry">
+                  <a href="#" class="product-item md-height bg-gray d-block">
+                    <img src="images/model_7.png" alt="Image" class="img-fluid">
+                  </a>
+                  <h2 class="item-title"><a href="#">Yellow Jacket</a></h2>
+                  <strong class="item-price">$58.00</strong>
+                  <div class="star-rating">
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                    <span class="icon-star2 text-warning"></span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
+    <div class="site-blocks-cover inner-page py-5" data-aos="fade">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto order-md-2 align-self-start">
+            <div class="site-block-cover-content">
+            <h2 class="sub-title">#New Summer Collection 2019</h2>
+            <h1>New Shoes</h1>
+            <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
+            </div>
+          </div>
+          <div class="col-md-6 order-1 align-self-end">
+            <img src="images/model_6.png" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </head>
-  <body class="aa-price-range">  
-    <div id="1"></div>
- 
-</body>
-  <!-- jQuery library -->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="/js/jquery.min.js"></script>  
-  <script src="/jq/test.js" type="text/babel"></script>
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script> 
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="/js/bootstrap.js"></script>   
-  <!-- slick slider -->
-  <script type="text/javascript" src="/js/slick.js"></script>
-  <!-- Price picker slider -->
-  <script type="text/javascript" src="/js/nouislider.js"></script>
-   <!-- mixit slider -->
-  <script type="text/javascript" src="/js/jquery.mixitup.js"></script>
-  <!-- Add fancyBox -->        
-  <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
-  <!-- Custom js -->
-  <script src="/js/custom.js"></script> 
-
- 
-</html>
+   <% include ./theme/footer.ejs %>

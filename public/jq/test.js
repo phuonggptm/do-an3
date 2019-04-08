@@ -1,43 +1,74 @@
-class Title extends React.Component{
+class Header extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+          user : false
+        }
     }
 
     render(){
         return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="aa-header-area">
-            <div className="row">
-              <div className="col-md-6 col-sm-6 col-xs-6">
-                <div className="aa-header-left">
-                  <div className="aa-telephone-no">
-                    <span className="fa fa-phone"></span>
-                    1-900-523-3564
-                  </div>
-                  <div className="aa-email hidden-xs">
-                    <span className="fa fa-envelope-o"></span> info@markups.com
-                  </div>
-                </div>              
-              </div>
-              <div className="col-md-6 col-sm-6 col-xs-6">
-                <div id="navbar" className="navbar-collapse collapse">
-                  <ul className="nav navbar-nav navbar-right">
-                   <li><a href="/cart" className="menu-btn"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span className="badge" id="cart-count"></span></a></li>
-                                        
-                      <li><a href="/users/logout"><i className="fa fa-sign-out" aria-hidden="true"> </i>Logout</a></li>
-                   
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <header id="aa-header">  
+          <div className="site-navbar bg-white py-2">
+<div className="search-wrap">
+  <div className="container">
+    <a href="#" className="search-close js-search-close"><span className="icon-close2"></span></a>
+    <form action="#" method="post">
+      <input type="text" className="form-control" placeholder="Search keyword and hit enter..."/>
+    </form>  
+  </div>
+</div>
+
+<div className="container">
+  <div className="d-flex align-items-center justify-content-between">
+    <div className="logo">
+      <div className="site-logo">
+        <a href="index.html" className="js-logo-clone">ShopMax</a>
       </div>
     </div>
+    <div className="main-nav d-none d-lg-block">
+      <nav className="site-navigation text-right text-md-center" role="navigation">
+        <ul className="site-menu js-clone-nav d-none d-lg-block">
+          <li className="has-children active">
+            <a href="index.html">Home</a>
+            <ul className="dropdown">
+              <li><a href="#">Menu One</a></li>
+              <li><a href="#">Menu Two</a></li>
+              <li><a href="#">Menu Three</a></li>
+              <li className="has-children">
+                <a href="#">Sub Menu</a>
+                <ul className="dropdown">
+                  <li><a href="#">Menu One</a></li>
+                  <li><a href="#">Menu Two</a></li>
+                  <li><a href="#">Menu Three</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="#">Catalogue</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div className="icons">
+      <a href="#" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></a>
+      <a href="#" className="icons-btn d-inline-block"><span className="icon-heart-o"></span></a>
+      <a href="cart.html" className="icons-btn d-inline-block bag">
+        <span className="fa fa-shopping"></span>
+        <span className="number">2</span>
+      </a>
+      <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span className="icon-menu"></span></a>
+    </div>
+  </div>
+</div>
+</div>
+</header>
         )
     }
+
 }
 
 
@@ -52,29 +83,23 @@ class Tabbar extends React.Component{
 
     render(){
         return(
-            <div id="navbar" className="navbar-collapse collapse">
-            <ul id="top-menu" className="nav navbar-nav navbar-right aa-main-nav">
-              <li className="active"><a href="index.html">HOME</a></li>
-               <li className="dropdown">
-                <a className="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span className="caret"></span></a>
-                <ul className="dropdown-menu" role="menu">                
-                  <li><a href="properties.html">PROPERTIES</a></li>
-                  <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
-                </ul>
-              </li>
-              <li><a href="gallery.html">GALLERY</a></li>                                         
-              <li className="dropdown">
-                <a className="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span className="caret"></span></a>
-                <ul className="dropdown-menu" role="menu">                
-                  <li><a href="blog-archive.html">BLOG</a></li>
-                  <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
-                </ul>
-              </li>
-              <li><a href="contact.html">CONTACT</a></li>
-             <li><a href="404.html">404 PAGE</a></li>
-            </ul>                            
-          </div>     
-             
+        
+          <div class="site-blocks-cover" data-aos="fade">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 ml-auto order-md-2 align-self-start">
+                <div class="site-block-cover-content">
+                <h2 class="sub-title">#New Summer Collection 2019</h2>
+                <h1>Arrivals Sales</h1>
+                <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
+                </div>
+              </div>
+              <div class="col-md-6 order-1 align-self-end">
+                <img src="images/model_3.png" alt="Image" class="img-fluid"/>
+              </div>
+            </div>
+          </div>
+        </div>
         )
     }
     
@@ -84,38 +109,19 @@ class Tabbar extends React.Component{
 class Showinfo extends React.Component{
     constructor(props){
         super(props)
+        this.state={
+          showImage: true
+        }
     }
 
     render(){
         return (
             
           
-
-            <section id="aa-slider">
-            <div className="aa-slider-area"> 
-            
-              <div className="aa-top-slider">
-               
-                <div className="aa-top-slider-single">
-                  <img src="/img/slider/1.jpg" alt="img"/>
-                
-                  <div className="aa-top-slider-content">
-                    <span className="aa-top-slider-catg">Duplex</span>
-                    <h2 className="aa-top-slider-title">1560 Square Feet</h2>
-                    <p className="aa-top-slider-location"><i className="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-                    <span className="aa-top-slider-off">30% OFF</span>
-                    <p className="aa-top-slider-price">$460,000</p>
-                    <a href="#" className="aa-top-slider-btn">Read More <span className="fa fa-angle-double-right"></span></a>
-                  </div>
-                
-                </div>
-                
-
-           </div>
-            </div>
-          </section>)     
+          <div></div>)
         }
 }
+
 
 class Search extends React.Component{
     constructor(props){
@@ -194,37 +200,64 @@ class About extends React.Component{
 }
 
 
+
+
+
+var info
 class Aticle extends React.Component{
     constructor(props) {
         super(props);
        
+      this.info = this.info.bind(this)
+      this.cart = this.info.bind(this)
+       
     }
 
     render(){
-        return(<div className="col-md-4">
+        return(<div className="col-md-3 col-sm-6 col-xs-12">
         <article className="aa-properties-item">
           <a href="#" className="aa-properties-item-img">
             <img src={"/uploads/"+ this.props.img} alt="img"/>
           </a>
           <div className="aa-properties-item-content">
             <div className="aa-properties-about">
-              <h3><a href="#">{this.props.title}</a></h3>
-              <p></p>                      
+          <center>
+              <h6><a href="#">{this.props.title}</a></h6>
+              </center>        
             </div>
             <div className="aa-properties-detial">
               <span className="aa-price">
-               {this.props.price}
+              
               </span>
-              <a href="/product/{this.id}" className="aa-secondary-btn">Xem chi tiết</a>
+              <div className="aa-footer-middle">
+              
+              <a href={'/product/addCart/'+ this.props.id}><i className="fa fa-shopping-cart"></i></a>
+                <a onClick ={this.info}><i className="fa fa-eye"></i></a>
+                <a href="#"><i className="fa fa-youtube" id="fa-fa"></i></a>
+                </div>
             </div>
           </div>
         </article>
         </div>)
     }
+
+    info(){
+      that.setState({showinfo:false})
+      that.setState({showImage:true})
+        $.post('/product/info',{id: this.props.num},function(data){
+          
+          info.setState({info:data ,url:data.img})
+        })
+      }
   
-    
-    
+
 }
+
+
+
+
+
+
 
 
 
@@ -274,83 +307,105 @@ class Footer extends React.Component{
 }
 
 
-class Body extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-          mang:[]
-         }
-        
+
+
+class InfoImage extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state={
+      info:[],
+      url: []
     }
-
-    render(){
-        return(
-        <div className="aa-price-range">  
-        <div id="aa-preloader-area">
-        <div className="pulse"></div>
-      </div>
-     
-        <a className="scrollToTop" href="#"><i className="fa fa-angle-double-up"></i></a>
-     
-      <header id="aa-header">  
-       <Title/>
-      </header>
-     
-      <section id="aa-menu-area">
-        <nav className="navbar navbar-default main-navbar" role="navigation">  
-          <div className="container">
-            <div className="navbar-header">
-            
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-             
-               <a className="navbar-brand aa-logo" href="index.html"> Home <span>Property</span></a>    
-            </div>
-           
-          <Tabbar/> 
-          </div>
-        </nav> 
-      </section>      
-            <Showinfo/>      
-            <Search/>
-      <section id="aa-latest-property">
-        <div className="container">
-          <div className="aa-latest-property-area">
-            <div className="aa-title">
-              <h2>Latest Properties</h2>
-              <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>         
-            </div>
-            <div className="aa-latest-properties-content">
-              <div className="row">
-                {this.state.mang.map(function(note,index){
-                  return <Aticle key ={index} id ={index} title = {note.title} img ={note.img[0]}/>
-                })}
-    
-              </div>
-            </div>
-          </div>
-        </div>
-        </section>
-        </div>)
-     
-    }  
-    
-    componentDidMount(){
-     var that = this
-      $.post('/admin/list_product', function(data){
-          that.setState({mang:data})
-          
-      })
-     
-
+    info = this
+  }
+  
+  render(){
+    return(<div className="container-fuilde">
+    <div className="col-lg-2">
+    </div>
+     <div className="col-lg-4">
+     <a href="#" className="aa-properties-item-img">
+        <img src={"/uploads/"+ this.state.url[0]} alt="img"/>
+      </a>
+     </div>
+    </div>)
 
   }
+ 
+  }
+
+
+
+
+
+
+var that
+class Body extends React.Component{
+  constructor(props) {
+      super(props);
+      that = this
+      this.state = {
+        showinfo :true,
+        showImage:false,
+        mang:[],
+      
+        }
+      
+  }
+
+  render(){
+      
+      return( 
+        <div className="aa-price-range">  
+          <div id="aa-preloader-area">
+            <div className="pulse"></div>
+            </div>
+            <a className="scrollToTop" href="#"><i className="fa fa-angle-double-up"></i></a>
+            <Header></Header>
+            <Tabbar></Tabbar>
+            <Showinfo></Showinfo>
+            { this.state.showinfo ?
+            <section id="aa-latest-property">
+              <div className="container">
+                <div className="aa-latest-property-area">
+                  <div className="aa-title">
+                    <h2>Latest Properties</h2>
+                      <span></span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>         
+                  </div>
+                  <div className="aa-latest-properties-content">
+                    <div className="row">
+                      {this.state.mang.map(function(note,index){
+                        return <Aticle key ={index} id ={note._id} num ={index} title = {note.title} img ={note.img[0]}/>
+                      })
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section> : null }
+            {this.state.showImage ? <InfoImage/>:null}
+            <ClientBrand/>
+            <Service/>
+            <LastBlog/>
+          <Footer/>
+        </div>)
+      }
+  componentDidMount(){
+  
+    $.post('/admin/list_product', function(data){
+        that.setState({mang:data})    
+    })  
+  }
 }
+
+
+
+
+
+
+
+
 class Service extends React.Component{
     render(){
         return( <section id="aa-service">
@@ -421,6 +476,11 @@ class Service extends React.Component{
    
 }
 
+
+
+
+
+
 class Best extends React.Component{
     constructor(props) {
         super(props);
@@ -445,6 +505,13 @@ class Best extends React.Component{
     }
     
 }
+
+
+
+
+
+
+
 class ClientSay extends React.Component{
     constructor(props) {
         super(props);
@@ -518,6 +585,13 @@ class ClientSay extends React.Component{
     }
     
 }
+
+
+
+
+
+
+
 
 
 class ClientBrand extends React.Component{
@@ -597,6 +671,12 @@ class ClientBrand extends React.Component{
 
 
 
+
+
+
+
+
+
 class LastBlog extends React.Component{
     constructor(props) {
         super(props);
@@ -617,46 +697,10 @@ class LastBlog extends React.Component{
                 </div>
                 <div className="aa-latest-blog-content">
                   <div className="row">
-                  
-                    <div className="col-md-4">
-                      <article className="aa-blog-single">
-                        <figure className="aa-blog-img">
-                          <a href="#"><img src="/img/blog-img-1.jpg" alt="img"/></a>
-                          <span className="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div className="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div className="aa-blog-single-bottom">
-                            <a href="#" className="aa-blog-author"><i className="fa fa-user"></i> Admin</a>
-                            <a href="#" className="aa-blog-comments"><i className="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>
-                       
-                      </article>
-                    </div>
-                   
                     <div className="col-md-4">
                       <article className="aa-blog-single">
                         <figure className="aa-blog-img">
                           <a href="#"><img src="/img/blog-img-2.jpg" alt="img"/></a>
-                          <span className="aa-date-tag">15 April, 16</span>
-                        </figure>
-                        <div className="aa-blog-single-content">
-                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                          <div className="aa-blog-single-bottom">
-                            <a href="#" className="aa-blog-author"><i className="fa fa-user"></i> Admin</a>
-                            <a href="#" className="aa-blog-comments"><i className="fa fa-comment-o"></i>6</a>
-                          </div>
-                        </div>                   
-                      </article>
-                    </div>
-                 
-                    <div className="col-md-4">
-                      <article className="aa-blog-single">
-                        <figure className="aa-blog-img">
-                          <a href="#"><img src="/img/blog-img-3.jpg" alt="img"/></a>
                           <span className="aa-date-tag">15 April, 16</span>
                         </figure>
                         <div className="aa-blog-single-content">
@@ -679,10 +723,16 @@ class LastBlog extends React.Component{
     }
     
 }
+
+
+
+
+
+
+
 ReactDOM.render(
-<div>
-<Body/> 
-<Service/>
-<LastBlog/>
-<Footer/>
-</div>  ,document.getElementById("1"))
+
+
+    <Body></Body>
+
+ ,document.getElementById("1"))

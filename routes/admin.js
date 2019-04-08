@@ -43,7 +43,7 @@ router.post("/create",upload.array('filename',2),function(req,res,next){
       size: req.body.name,
       price: req.body.price,
       dis: req.body.dis,
-      num: req.body.Number
+      num: req.body.num
   })
   newPro.save()
   
