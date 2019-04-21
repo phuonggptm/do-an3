@@ -463,16 +463,16 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background: #f9f9f9;
   position: relative;
   overflow: hidden;
   z-index: 9; }
+  
   .site-blocks-cover, .site-blocks-cover .row {
-    min-height: 600px;
+    min-height: 400px;
     height: calc(100vh - 174px); }
   .site-blocks-cover.inner-page, .site-blocks-cover.inner-page .row {
     min-height: 400px;
-    height: 500px; }
+    height: 400px; }
   .site-blocks-cover h2 {
     font-size: 14px;
     font-weight: normal;
@@ -483,7 +483,7 @@ a {
     font-size: 50px;
     font-weight: 900;
     color: #000;
-    margin-bottom: 30px;
+    
     text-transform: uppercase; }
     @media (min-width: 768px) {
       .site-blocks-cover h1 {
@@ -496,18 +496,23 @@ a {
     font-size: 16px;
     line-height: 1.5; }
   .site-blocks-cover .site-block-cover-content {
-    margin-top: 20%;
+    align-content: center;
+    align-items: center;
+
     text-align: center; }
     @media (min-width: 768px) {
       .site-blocks-cover .site-block-cover-content {
-        margin-top: 50%; } }
+        margin-top: 20%;
+     } }
   .site-blocks-cover.inner-page .site-block-cover-content {
-    margin-top: 20%;
+  
     text-align: center; }
     @media (min-width: 768px) {
       .site-blocks-cover.inner-page .site-block-cover-content {
-        margin-top: 30%; } }
-
+        } }
+        .site-blocks-cover img {
+          height: 500px;
+        }
 .site-blocks-1 {
   border-bottom: 1px solid #edf0f5; }
   .site-blocks-1 .divider {
@@ -950,3 +955,21 @@ a {
 
 .height-auto {
   height: auto !important; }
+
+.title-detail {
+  background: url('/images/tittle1.jpg');
+  background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+  padding: 30px 30px;
+ 
+ 
+}
+.row-detal{
+  margin: 30px auto;
+}
+.btn-cart {
+  margin-bottom: 10px;
+  width: 150px;
+  text-align: center;
+}

@@ -962,11 +962,17 @@ a,p{
  AGENTS SECTION
 ====================*/
 
+.status-img {
+  height:50px ;
+  margin: 30px auto;
+  
+
+}
 #aa-agents {
   display: inline;
   float: left;
   width: 100%;
-  padding: 100px 0;
+  padding: 10px 0;
 }
 #aa-agents .aa-agents-area {
   display: inline;
@@ -2483,7 +2489,7 @@ a,p{
 ====================*/
 
 #aa-signin {
-  background-image: url("../img/signin-bg.jpg");
+  background-image: url("/images/signin.jpg");
   background-position: center center;
   background-size: cover;
   bottom: 0;
@@ -2496,7 +2502,7 @@ a,p{
   width: 100%;
 }
 #aa-signin:before {
-  background-color: rgba(0, 0, 0, 0.8);
+
   content: '';
   position: fixed;
   left: 0;

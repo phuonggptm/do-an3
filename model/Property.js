@@ -6,10 +6,10 @@ var Property = mongoose.Schema({
     num: {type:Number},
     name: {type: String},
     type: {type: String},
-    size: {type: String},
+    product: {type: String},
     price: {type: Number },
     dis : {type: String},
-    title: {type: String}
+    author: {type: String},
 
 })
 Property.plugin(random);

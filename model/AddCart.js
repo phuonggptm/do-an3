@@ -4,10 +4,9 @@ mongoose.Promise = global.Promise;
 
 var AddCart = new Schema({
  
-  user		: {type:  String},
-  msg		: {type: String },
-  ngay		: {type: String},
-  tong   	:{type: Number},
+  user		: {type: Object},
+  date		: {type: String},
+  sum   	:{type: Number},
   cart   	: { type: Object},
   trangthai : {type: String}
 });

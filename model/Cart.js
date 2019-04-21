@@ -6,7 +6,7 @@ function Cart (oldCart){
 
 		if(!giohang){
 			giohang = this.items[id] = 
-			{item: item, soluong: 0, tien: 0}
+			{item: item, soluong: 0, tien: 0, it: id}
 		}
 		giohang.soluong++;
 		giohang.tien = giohang.soluong * giohang.item.price;
@@ -17,15 +17,15 @@ function Cart (oldCart){
 		for(var id in this.items){
 			arr.push(this.items[id]);
 		}
+		
 
 		return arr;
 	}
 
-	this.updateCart = function(id, soluong){
-
+	this.updateCart = function(id,soluong){
 		var giohang = this.items[id];
-		this.items[id].soluong = soluong;
-		this.items[id].tien = giohang.item.price * soluong;
+		giohang.soluong = soluong;
+		giohang.tien = giohang.soluong * giohang.item.price;
 
 		//console.log(giohang);
 	}

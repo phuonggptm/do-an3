@@ -40,22 +40,16 @@ class Cart extends React.Component{
 
   render(){
     return(
-      <section id="product">
+      <section className ="site-section">
         <div className="container">
-          <ul className="breadcrumb">
-            <li>
-              <span className="divider">/</span>
-            </li>
-            <li className="active"> Shopping Cart</li>
-          </ul>       
-          <center> <h1><span className="subtext"> Giỏ hàng của bạn</span></h1></center> 
+        
           <div className="cart-info">
             <table className="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th className="image">Image</th>
-                  <th className="name">Product Name</th>
-                  <th className="quantity">Số Lượng</th>
+                  <th className="product-thumbnail">Image</th>
+                  <th className="product-name">Product Name</th>
+                  <th className="product-quantity">Số Lượng</th>
                   <th className="total">Action</th>
                   <th className="price">Giá</th>
                   <th className="total">Tiền</th>
@@ -64,7 +58,7 @@ class Cart extends React.Component{
               <tbody>
                 {this.state.mang.map(function(node,index){
                   {total += node.tien}
-                  return <Product key = {index} id ={node._id} name = {node.name} img = {node.item.img[0]} quantity = {node.soluong} price = {node.item.price} cost ={node.tien}></Product>
+                  return <Product key = {index} id ={node.it} name = {node.item.name} img = {node.item.img[0]} quantity = {node.soluong} price = {node.item.price} cost ={node.tien}></Product>
               })}
               </tbody>
             </table>
@@ -73,10 +67,11 @@ class Cart extends React.Component{
             <div className="container">
               <div className="pull-right">
                   <div className="span4 pull-right">
+                
                     <table className="table table-striped table-bordered ">
                       <tbody>
                         <tr>
-                          <td><span className="extra bold totalamout">Total :</span></td>
+                          <td><span className="extra bold totalamout text-black">Total :</span></td>
                         <td>
                           <span className="pp">
                           {total}
@@ -85,7 +80,7 @@ class Cart extends React.Component{
                       </tr>
                     </tbody>
                   </table>
-                  <button className="btn btn-orange pull-right">Đặt Hàng</button>
+                  <button className="btn btn-primary btn-lg btn-block pull-right">Đặt Hàng</button>
                 </div>
               </div>
             </div>
@@ -109,6 +104,7 @@ class Product extends React.Component{
   constructor(props) {
     super(props);
     this.sum = this.sum.bind(this)
+    this.update= this.update.bind(this)
     product = this
   }
 
@@ -117,12 +113,27 @@ class Product extends React.Component{
         <tr>
           <td className ="image"><a href="#"><img title="product" alt="product" src={"/uploads/"+ this.props.img}height="50" width="50" /></a></td>
           <td className ="name"><a href="">{this.props.name}</a></td>
-          <td type="number" className="quantity">{this.props.quantity}</td>
-          <td><a href={"/product/delCart/" + this.props.id}>Xóa</a></td>
+          <td >
+            
+            <input  ref ='txt' defaultValue ={this.props.quantity} encType="number" className="form-control text-center" aria-label="Example text with button addon" aria-describedby="button-addon1"/>
+            
+            
+          </td>
+          <td><a href={"/product/delCart/" + this.props.id}>Xóa</a>/ 
+              <button onClick={this.update}>Update</button></td>
           <td>{this.sum(this.props.price)}</td>
           <td>{this.sum(this.props.cost)}</td>
         </tr>
     )
+  }
+
+  update(){
+    var id = this.props.id;
+    var num = this.refs.txt.value;
+    $.post('/product/update', {id: id, num: num},function(data){
+      total = 0;
+      that.setState({mang: data})
+  })
   }
 
   sum(amount){

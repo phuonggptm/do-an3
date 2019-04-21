@@ -5,6 +5,21 @@ var flash = require('connect-flash');
 var bcrypt = require('bcryptjs');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../model/User.js')
+var Property = require('../model/Property.js')
+
+function bodauTiengViet(str) {
+	str = str.toLowerCase();
+	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+	str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+	str = str.replace(/đ/g, "d");
+	str = str.replace(/ /g, "-");
+	str = str.replace(/\./g, "-");
+	return str;
+}
 
 
 /* GET users listing. */
@@ -22,7 +37,7 @@ router.post('/resgiter',function(req,res,next){
 	User.findOne(query,function(err,user){
 	  	if(err) throw err; 
 	  	if(user){
-			console.log(user);
+	
 			msg ="Tài khoản đã tồn tại";
 		 	// console.log(msg);
 			messages.push(msg);
@@ -79,7 +94,7 @@ passport.serializeUser(function(user, done) {
    // used to deserialize the user 
 passport.deserializeUser(function(id, done) { 
 	User.getUserById(id, function(err, user) { 
-	   console.log(user.type);
+	 
 	done(err, user); 
 	}); 
 }); 
@@ -127,7 +142,7 @@ router.post('/update/:id', function(req,res,next){
 	}
 	User.updateOne({_id: req.params.id},newvalue,function(err,data){
 		if (err) throw err;
-		console.log(data)
+		
 	})
 	res.location('/');
 	res.redirect('/');
@@ -150,4 +165,31 @@ function person(req,res,next){
 	res.redirect('/');
 	
 }
+
+router.post('/search',function(req,res,next){
+	var search = bodauTiengViet(req.body.search);
+  	var checks =[];
+   	var searchs = []
+	Property.find(function(err,data){
+		if (err) throw err;
+		data.forEach(function(item){
+			var name = bodauTiengViet(item.name);
+			var   dis = bodauTiengViet(item.dis);
+			var type= bodauTiengViet(item.type )
+			if(name.search(search) >=0 || type.search(search) >=0 || dis.search(search) >=0) { 
+			searchs.push(item);
+			}	
+		})
+	
+		Property.findRandom({}, {},{limit: 4},function(err,docs){
+		if(searchs.length === 0 ){
+			var messages ="Không có sản phẩm phù hợp"
+			res.render('user/search',{ searchs:checks ,messages: messages,products: docs, user : req.user ? req.user : undefined});
+			}
+		else{
+			res.render('user/search', {searchs: searchs ,products: docs, user : req.user ? req.user : undefined})
+			}
+		})
+	})
+})
 module.exports = router;
