@@ -10,54 +10,145 @@
             </li>
         </ul>       
           <center>   <div  style=" margin:30px auto"><span style="color:lightcoral; font-size: 24px">Chi tiết sản phẩm </span></div></center>
-        <div class="row row-detal">
+       
+            
+            <div class="container_fullwidth">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="products-details">
+                        <div class="preview_image">
+                          <div class="preview-small">
+                            <img id="zoom_03" src="/uploads/<%= data.img[0] %>" data-zoom-image="/uploads/<%= data.img[0] %>" alt="">
+                          </div>
+                          <div class="thum-image">
+                            <ul id="gallery_01" class="prev-thum">
+                              <li>
+                                <a href="#" data-image="/uploads/<%= data.img[0] %>" data-zoom-image="/uploads/<%= data.img[0] %>">
+                                  <img src="/uploads/<%= data.img[0] %>" alt="">
+                                </a>
+                              </li>
+              
+                              <li>
+                                <a href="#" data-image="/uploads/<%= data.img[1] %>" data-zoom-image="/uploads/<%= data.img[1] %>">
+                                  <img src="/uploads/<%= data.img[1] %>" alt="">
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#" data-image="/uploads/<%= data.img[0] %>" data-zoom-image="/uploads/<%= data.img[0] %>">
+                                  <img src="/uploads/<%= data.img[0] %>" alt="">
+                                </a>
+                              </li>
+                              
+                            </ul>
+                            <a class="control-left" id="thum-prev" href="javascript:void(0);">
+                              <i class="fa fa-chevron-left">
+                              </i>
+                            </a>
+                            <a class="control-right" id="thum-next" href="javascript:void(0);">
+                              <i class="fa fa-chevron-right">
+                              </i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="products-description">
+                          <h5 class="name">
+                            <%= data.name %>
+                          </h5>                  
+                           Số lượng sản phẩm 
+                            <span class=" light-red">
+                              <%= data.num %>
+                            </span>
+                          </p>
+                          <p>
+                            <%= data.dis %>
+                          </p>
+                          <hr class="border">
+                          <div class="price">
+                            Giá : 
+                            <span class="new_price">
+                              <%= data.price %>
+                              <sup>
+                                đ
+                              </sup>
+                            </span>
+                            
+                          </div>
+                          <hr class="border">
+                          <div class="wided">
+                           
+                            <div class="button_group">
+                              <a class="button" href="/product/addCart/<%= data._id%>">
+                                Add To Cart
+                              </a>
+                             
+                            </div>
+                          </div>
+                          <div class="clearfix">
+                          </div>
+                          <hr class="border">
+                          <img src="images/share.png" alt="" class="pull-right">
+                        </div>
+                      </div>
+                      <div class="clearfix">
+                      </div>
+                      <div class="tab-box">
+                        <div id="tabnav">
+                          <ul>
+                            <li>
+                              <a href="#Descraption">
+                                DESCRIPTION
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#Reviews">
+                                REVIEW
+                              </a>
+                            </li>
+                          </ul>
+                      </div>  
+                      <div id="Descraption">
+                      <div class="cart-info">
+                        <table class="table table-striped table-bordered">
+                          <tr>
+                            <td class="name">Bìa sách</td>
+                            <td class="name"><img src="/uploads/<%= data.img[0] %>" height="50" width="50"></td>
+                          </tr>
+                          <tr>
+                            <td class="name">Công ty phát hành</td>
+                            <td class="name"><a href="/type/cty/<%= data.cty %>"> <%= data.product %></a></td>
+                            </tr>
+                             <tr>
+                            <td class="name">Tác giả</td>
+                            <td class="name"><a href="/type/tacgia/<%= data.title %>"><%= data.author %></a></td>
+                            </tr>
+                             <tr>
+                            <td class="name">Kích thước</td>
+                            <td class="name"><%= data.size %></td>
+                            </tr>
+                             <tr>
+                            <td class="name">Thể loại</td>
+                            <td class="name"><%= data.type %></td>
+                            </tr>
+                             <tr>
+                            <td class="name">Số trang</td>
+                            <td class="name"><%= data.page %></td>
+                            </tr>
+                             <tr>
+                            <td class="name">Cân nặng</td>
+                            <td class="name"> <%= data.weight %> gr</td>
+                            </tr>
+                        </table>
+                    </div>
+                   </div> 
 
-           <div class="col-md-4 col-sm-4 item-photo">
-                <img style="max-width:100%;" src="/uploads/<%= data.img[0] %>" />
-            </div>
-            <div class="col-md-8 col-sm-8 title-detail">
-               
-                <!-- Datos del vendedor y titulo del producto -->
-                <h5  style="color:#337ab7"><%= data.name %></h5>    
-                <h6 class="title-price"><small><%= data.author %></small></h6>
-                <h3 style="margin-top:0px"><%= data.price %> đ</h3>
-                <!-- Botones de compra -->
-               
-                    <a href="/product/addCart/<%= data._id %>" class="btn btn-success btn-cart"> Thêm vào giỏ hàng</a>
-                                                     
-            </div>                              
-    
-            <div class="col-xs-9">
-               
-                <div style="width:100%;border-top:1px solid silver">
-                    <p style="padding:15px;">
-                        <small>
-                        Stay connected either on the phone or the Web with the Galaxy S4 I337 from Samsung. With 16 GB of memory and a 4G connection, this phone stores precious photos and video and lets you upload them to a cloud or social network at blinding-fast speed. With a 17-hour operating life from one charge, this phone allows you keep in touch even on the go. 
-    
-                        With its built-in photo editor, the Galaxy S4 allows you to edit photos with the touch of a finger, eliminating extraneous background items. Usable with most carriers, this smartphone is the perfect companion for work or entertainment.
-                        </small>
-                    </p>
-                    <small>
-                        <ul>
-                            <li>Super AMOLED capacitive touchscreen display with 16M colors</li>
-                            <li>Available on GSM, AT T, T-Mobile and other carriers</li>
-                            <li>Compatible with GSM 850 / 900 / 1800; HSDPA 850 / 1900 / 2100 LTE; 700 MHz Class 17 / 1700 / 2100 networks</li>
-                            <li>MicroUSB and USB connectivity</li>
-                            <li>Interfaces with Wi-Fi 802.11 a/b/g/n/ac, dual band and Bluetooth</li>
-                            <li>Wi-Fi hotspot to keep other devices online when a connection is not available</li>
-                            <li>SMS, MMS, email, Push Mail, IM and RSS messaging</li>
-                            <li>Front-facing camera features autofocus, an LED flash, dual video call capability and a sharp 4128 x 3096 pixel picture</li>
-                            <li>Features 16 GB memory and 2 GB RAM</li>
-                            <li>Upgradeable Jelly Bean v4.2.2 to Jelly Bean v4.3 Android OS</li>
-                            <li>17 hours of talk time, 350 hours standby time on one charge</li>
-                            <li>Available in white or black</li>
-                            <li>Model I337</li>
-                            <li>Package includes phone, charger, battery and user manual</li>
-                            <li>Phone is 5.38 inches high x 2.75 inches wide x 0.13 inches deep and weighs a mere 4.59 oz </li>
-                        </ul>  
-                    </small>
+                   <div id="Reviews">
+                    <div class=" container cart-info">
+                        <img src="/uploads/<%= data.img[1] %>">
+                  </div>
+                 </div> 
+                  </div>             
                 </div>
-            </div>		
-        </div>
-    </div>        
+              </div> 
+<% include ../theme/products.ejs %>       
 <% include ../theme/footer.ejs %>

@@ -5,6 +5,31 @@ var Property = require('../model/Property.js')
 var parser = require('body-parser').urlencoded({extended:false})
 var passport = require('passport');
 var flash = require('connect-flash');
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+var footer =[], views =[], buy =[];
+Property.findRandom({}, {},{limit: 4},function(err,docs){
+ docs.forEach(function(item){
+   footer.push(item);
+ })
+ })
+
+ var view = function view(){
+  views=[];
+  console.log(views)
+  Property.find().sort('-views').limit(3).exec(function(er,view){
+    view.forEach(function(item){
+      views.push(item);
+    })
+  })
+}
+
+Property.find().sort('-buy').limit(3).exec(function(er,view){
+  view.forEach(function(item){
+    buy.push(item);
+  })
+})
+eventEmitter.addListener('clickview', view);
 
 
 function bodauTiengViet(str) {
@@ -32,6 +57,7 @@ var countJson = function(json){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	eventEmitter.emit('clickview'); 
 	console.log(req.isAuthenticated());
 	if(req.isAuthenticated() && (  'admin' === req.user.type)){
 		// console.log(req.user);
@@ -40,7 +66,7 @@ router.get('/', function(req, res, next) {
  	
 	else{
 		Property.findRandom({}, {},{limit: 4},function(err,docs){
-			res.render('index', {title:'Shopping',products: docs,user : req.user ? req.user : undefined});
+			res.render('index', {title:'Shopping',products: docs,buy:buy,views:views,user : req.user ? req.user : undefined});
 		})
 	}
 })
@@ -51,19 +77,13 @@ router.get('/admin', function(req,res,next){
 })
 
 
-router.get('/user',function(req,res,next){
-	Property.find(function(er, dat){
-		if (er) throw er;
-		Property.find().sort('-price').limit(1).exec(function(er,price){
-			var t = price
-			console.log(t)
-				res.render('user/index', {user : req.user ? req.user : undefined, all:dat, best:t})
-			})
-		
-	})
-	
-})	
+router.get('/topbook', function(req,res,next){
+	Property.find().sort('-price').limit(1).exec(function(er,price){
+		var t = price
 
+			res.render('user/topbook', {user : req.user ? req.user : undefined, best:price})
+		})
+})
 
 router.post('/search',function(req,res,next){
 	var search = bodauTiengViet(req.body.search);
@@ -86,7 +106,7 @@ router.post('/search',function(req,res,next){
 			res.render('user/search',{ searchs:checks ,messages: messages,products: docs, user : req.user ? req.user : undefined});
 			}
 		else{
-			res.render('user/search', {searchs: searchs ,products: docs, user : req.user ? req.user : undefined})
+			res.render('user/search', {searchs: searchs ,products: docs, buy:buy, views:views,user : req.user ? req.user : undefined})
 			}
 		})
 	})

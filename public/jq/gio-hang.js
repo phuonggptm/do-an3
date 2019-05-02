@@ -132,7 +132,13 @@ class Product extends React.Component{
     var num = this.refs.txt.value;
     $.post('/product/update', {id: id, num: num},function(data){
       total = 0;
+      if(Array.isArray(data)){
       that.setState({mang: data})
+      }
+      else{
+        
+        ReactDOM.render( <div className="container"><h6>{data}</h6></div>,document.getElementById('maincontainer'))
+      }
   })
   }
 

@@ -1,0 +1,31 @@
+
+ <% include ../theme/header.ejs %>
+ <% include ../theme/slide.ejs %>
+ <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="title-section mb-5 col-12">
+          <h2 class="text-uppercase">Sản phẩm yêu thích</h2>
+        </div>
+      </div>
+      <div class="row text-center">
+        <% best.forEach(function(product){ %>
+         <div class="col-lg-3 col-md-6 mb-4">
+         <div class="card">
+         
+           <img id = "img" class="card-img-top" src="/uploads/<%= product.img[0] %>" alt="<%= product.name %>">
+           <div class="card-body">
+             <h4 class="card-title"><%= product.name %></h4>
+           </div>
+           <div class="card-footer">
+             <a href="/product/info/<%= product._id %>" class="btn btn-primary">Xem chi tiết!</a>
+           </div>
+         </div>
+       </div>
+      <% })%>    
+ 
+     </div>
+    </div>
+  </div>
+
+  <% include ../theme/footer.ejs %>

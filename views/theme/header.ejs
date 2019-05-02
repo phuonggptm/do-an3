@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ShopMax &mdash; Colorlib e-Commerce Template</title>
+    <title>PhuongTwo &mdash; Kho tàng tri thức</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,11 +13,16 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/detail.css" >
-
+    <link rel="stylesheet" href="/css/detail.css" > <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,100italic,100' rel='stylesheet' type='text/css'>
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/app.js" type="text/css" media="screen"/>
     <link rel="stylesheet" href="/css/aos.css">
+    
 
     <link rel="stylesheet" href="/css/stylemenu.css">
+   
+ 
+   
     
   </head>
   <body>
@@ -40,33 +45,37 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="/" class="js-logo-clone">ShopMax</a>
+              <a href="/" class="js-logo-clone">PhuongTwo</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="has-children active">
-                  <a href="/">Home</a>
-                  <ul class="dropdown">
-                    <li><a href="/product/listInfoCart">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
-                      <a href="#">Sub Menu</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class=" active">
+                  <a href="/">Trang chủ</a>
+                  
                 </li>
                 
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="#">Catalogue</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li class="has-children"><a href="">Đơn hàng</a>
+                  <ul class="dropdown">
+                    <% if(user){ %>
+                    <li><a href="/product/listInfoCart">Đơn hàng của bạn</a></li>
+                      <% } %>
+                    <li><a href="/product/cart">Giỏ hàng của bạn</a></li>
+                  
+                  </ul>
+                </li>
+                <li class = "has-children"><a href="">Thể loại</a>
+                <ul class="dropdown">
+                   
+                    <li><a href="/type/short_story">Truyện ngắn</a></li>
+                    <li><a href="/type/tieu_thuyet">Tiểu thuyết</a></li>
+                    <li><a href="/type/cotich">Cổ tích</a></li>
+
+                  </ul>
+                 </li>
+                <li><a href="/">Top yêu thích</a></li>
+                <li><a href="/product/contact">Liên lạc</a></li>
               </ul>
             </nav>
           </div>

@@ -7,11 +7,15 @@
     </div>
   </div>
   <div class="container">
-       
-            <%  if(data){ data.forEach(function(it){ %>
+    <div class="row">
+      <div class="title-section mb-5 col-12">
+        <h2 class="text-uppercase">Tình trạng đơn hàng</h2>
+      </div>
+    </div>
+            <%  if(data.length >0){ data.forEach(function(it){ %>
                 <div class= "tong1" >
-                <p > Đơn hàng ngày: <%= it.date %></p>
-                <p>Tình trạng đơn hàng: <span style="color: #FF3300"><%= it.trangthai %> </span></p>
+                <h5 > Đơn hàng ngày: <%= it.date %></h5>
+                <h6>Tình trạng đơn hàng: <span style="color: #FF3300"><%= it.trangthai %> </span></h6>
                 </div>
 
                 <% if(it.trangthai ==="Đang chờ xử lý"){ %>
@@ -20,7 +24,7 @@
                         <img src="/images/vc1.png" alt="">
                     </div>
                 </div>
-                <% } else if(it.trangthai ==="Đang vận chuyển"){ %>
+                <% } else if(it.trangthai ==="Đang vận chuyển "){ %>
                     
                     <div class="container status-img">
                         <img src="/images/vc2.png" alt="">
@@ -33,11 +37,15 @@
                 <%}}) %>
              
                
-        <%} %>
+        <%}else { %>
+
+          <h5>Bạn hiện không có đơn hàng nào</h5>
+        <% } %>
   </div>
  
 
 
-
+<% include ../theme/products.ejs %>
+<%include ../theme/views.ejs %>
 <% include ../theme/footer.ejs %>
 

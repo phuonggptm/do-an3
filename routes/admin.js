@@ -30,7 +30,7 @@ router.get("/list_product", function(req,res,next){
 
 router.get('/user',function(req,res,next){
  User.find().populate('User').exec(function(err,carts){
-   console.log(carts)
+   
    res.send(carts)
  })
 })
@@ -54,7 +54,12 @@ router.post("/create",upload.array('filename',2),function(req,res,next){
       price: req.body.price,
       dis: req.body.dis,
       num: req.body.num,
-      product : req.body.product
+      product : req.body.product,
+      views: 0,
+      buy:0,
+      page: req.body.page,
+      size: req.body.size,
+      weight: req.body.weight
   })
   newPro.save()
   
@@ -63,6 +68,7 @@ router.post("/create",upload.array('filename',2),function(req,res,next){
 
 //Display Property
 router.post('/edit',parser, function(req,res,next){
+  console.log(req.body.id)
   Property.findById(req.body.id, function(err,data){
     if (err) throw err;
     res.send(data)
@@ -83,15 +89,18 @@ router.post('/edit/:id',upload.array('filename',2),function(req,res,next){
       price: req.body.price,
       dis: req.body.dis,
       num: req.body.num,
-      product : req.body.product
+      product : req.body.product,
+      page: req.body.page,
+      size: req.body.size,
+      weight: req.body.weight
  }};
      console.log(req.params.id);
        Property.updateOne({_id: req.params.id},newValue,function (err,res){
              if(err) throw err;
-             console.log();
+            
            })
-          res.location('/');
-          res.redirect('/');
+          res.location('/admin');
+          res.redirect('/admin');
 })
 router.post('/delete', parser, function(req,res,next){
   Property.findById(req.body.id).deleteOne(function() { 
@@ -104,12 +113,13 @@ router.post('/status',parser, function(req,res,next){
   newValue ={$set:{
     trangthai:req.body.status
   }}
+  console.log(req.body.status)
+  console.log(req.body.id)
   Cart.updateOne({_id:req.body.id},newValue,function(err,res){
         if(err) throw err;
-        console.log();
-      })
-    res.location('/admin/list_product');
-    res.redirect('/admin/list_product');
+  })
+    res.location("/admin");
+    res.redirect("/admin/order");
   })
 
 
@@ -127,8 +137,30 @@ router.get('/statistic_book',function(req,res,next){
       console.log(date);
       type.cart.forEach(function(ty){
       console.log(ty.soluong);
-      checks[date-1] += ty.soluong;
+      checks[date-1] += parseInt(ty.soluong,10);
       })
+    console.log(checks);
+    
+    })
+    res.send(checks)
+  })
+})
+
+router.get('/statistic',function(req,res,next){
+  var checks = [0,0,0,0,0,0,0,0,0,0,0,0];
+  Cart.find(function (err,types) {
+    if(err) throw err;
+    types.forEach(function(type){
+      var t = type.date;
+      fist= t.indexOf("-")
+      last = t.lastIndexOf("-");
+      var cat = t.slice(fist+1,last)
+      console.log(cat);
+      var date = parseInt(cat,10);
+      console.log(date);
+      
+      checks[date-1] += type.sum;
+     
     console.log(checks);
     
     })

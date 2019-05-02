@@ -25,36 +25,58 @@ function bodauTiengViet(str) {
 /* GET users listing. */
 
 
+var footer =[], views =[], buy =[];
+Property.findRandom({}, {},{limit: 4},function(err,docs){
+ docs.forEach(function(item){
+   footer.push(item);
+ })
+ })
+Property.find().sort('-views').limit(3).exec(function(er,view){
+  view.forEach(function(item){
+    views.push(item);
+  })
+})
+
+Property.find().sort('-buy').limit(3).exec(function(er,view){
+  view.forEach(function(item){
+    buy.push(item);
+  })
+})
 router.get('/resgiter', function(req,res,next){
-	
-	res.render("user/resgiter")
+	var messages=[]
+	res.render("user/resgiter",{messages:messages,hasErrors:false})
 });
 
 router.post('/resgiter',function(req,res,next){
-	var messages = [];
+	var messages =[]
 	let query = {email: req.body.email};
-	
-	User.findOne(query,function(err,user){
+	req.checkBody('password2', 'Hãy xác nhận lại mật khẩu').equals(req.body.password);
+	var errors = req.validationErrors();
+	if(errors){
+		errors.forEach(function(error){
+		 messages.push(error.msg);
+		});}
+		User.findOne(query,function(err,user){
 	  	if(err) throw err; 
 	  	if(user){
-	
-			msg ="Tài khoản đã tồn tại";
+			
+			msg ="Email đã tồn tại";
 		 	// console.log(msg);
 			messages.push(msg);
 			console.log(messages);
 		}
   
 	 	if(messages.length > 0){      
-		  	res.render("user/resgiter",{
+		  res.render("user/resgiter",{
 			messages: messages,
 			hasErrors: messages.length > 0,
 			user : req.user ? req.user : undefined
-		  	})
+		  })
 		}
 		else {
 			var newUser = new User({
 			name: req.body.name,
-			address: req.body.address,
+			address: req.body.addr,
 			phone: req.body.phone,
 			email : req.body.email,
 			password : req.body.password,
