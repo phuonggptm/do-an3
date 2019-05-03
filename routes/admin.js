@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var flash = require('connect-flash');
-var bcrypt = require('bcryptjs');
-var LocalStrategy = require('passport-local').Strategy;
+var parser = require('body-parser').urlencoded({extended:false})
 var User = require('../model/User.js')
+var Cart = require('../model/AddCart.js')
 var Property = require('../model/Property.js')
 var mongoose = require('mongoose');
 var db  = mongoose.connection;
@@ -23,9 +22,22 @@ const upload = multer({
 });
 
 // Creatr property
-router.get("/list_product", auto, function(req,res,next){
-  Property.find(function(e,pro){
-    res.render("admin/list_product",{ property:pro,user : req.user ? req.user : undefined})
+router.get("/list_product", function(req,res,next){
+  Property.find(function(e,data){
+    res.send(data)
+  })
+})
+
+router.get('/user',function(req,res,next){
+ User.find().populate('User').exec(function(err,carts){
+   
+   res.send(carts)
+ })
+})
+
+router.get('/order',function(req,res,next){
+  Cart.find(function(e,carts){
+    res.send(carts)
   })
 })
 router.post("/create",upload.array('filename',2),function(req,res,next){
@@ -36,22 +48,125 @@ router.post("/create",upload.array('filename',2),function(req,res,next){
   var newPro = new Property({
      
       img: img,
-      title : req.body.title,
+      author : req.body.author,
       name: req.body.name,
       type: req.body.type,
-      size: req.body.name,
       price: req.body.price,
       dis: req.body.dis,
-      num: req.body.Number
+      num: req.body.num,
+      product : req.body.product,
+      views: 0,
+      buy:0,
+      page: req.body.page,
+      size: req.body.size,
+      weight: req.body.weight
   })
   newPro.save()
   
-  res.redirect("/")
+  res.redirect("/admin")
 })
 
 //Display Property
+router.post('/edit',parser, function(req,res,next){
+  console.log(req.body.id)
+  Property.findById(req.body.id, function(err,data){
+    if (err) throw err;
+    res.send(data)
+  })
+})
+
+router.post('/edit/:id',upload.array('filename',2),function(req,res,next){
+  var img =[];
+  req.files.forEach(function(file){
+      img.push(file.filename)
+  })
+  var newValue={$set:
+    { 
+      img: img,
+      author : req.body.author,
+      name: req.body.name,
+      type: req.body.type,
+      price: req.body.price,
+      dis: req.body.dis,
+      num: req.body.num,
+      product : req.body.product,
+      page: req.body.page,
+      size: req.body.size,
+      weight: req.body.weight
+ }};
+     console.log(req.params.id);
+       Property.updateOne({_id: req.params.id},newValue,function (err,res){
+             if(err) throw err;
+            
+           })
+          res.location('/admin');
+          res.redirect('/admin');
+})
+router.post('/delete', parser, function(req,res,next){
+  Property.findById(req.body.id).deleteOne(function() { 
+		//req.flash('success_msg', 'Đã Xoá Thành Công');
+		res.redirect('/admin/list_product');
+	});
+})
+
+router.post('/status',parser, function(req,res,next){
+  newValue ={$set:{
+    trangthai:req.body.status
+  }}
+  console.log(req.body.status)
+  console.log(req.body.id)
+  Cart.updateOne({_id:req.body.id},newValue,function(err,res){
+        if(err) throw err;
+  })
+    res.location("/admin");
+    res.redirect("/admin/order");
+  })
 
 
+router.get('/statistic_book',function(req,res,next){
+  var checks = [0,0,0,0,0,0,0,0,0,0,0,0];
+  Cart.find(function (err,types) {
+    if(err) throw err;
+    types.forEach(function(type){
+      var t = type.date;
+      fist= t.indexOf("-")
+      last = t.lastIndexOf("-");
+      var cat = t.slice(fist+1,last)
+      console.log(cat);
+      var date = parseInt(cat,10);
+      console.log(date);
+      type.cart.forEach(function(ty){
+      console.log(ty.soluong);
+      checks[date-1] += parseInt(ty.soluong,10);
+      })
+    console.log(checks);
+    
+    })
+    res.send(checks)
+  })
+})
+
+router.get('/statistic',function(req,res,next){
+  var checks = [0,0,0,0,0,0,0,0,0,0,0,0];
+  Cart.find(function (err,types) {
+    if(err) throw err;
+    types.forEach(function(type){
+      var t = type.date;
+      fist= t.indexOf("-")
+      last = t.lastIndexOf("-");
+      var cat = t.slice(fist+1,last)
+      console.log(cat);
+      var date = parseInt(cat,10);
+      console.log(date);
+      
+      checks[date-1] += type.sum;
+     
+    console.log(checks);
+    
+    })
+    res.send(checks)
+  })
+})
 //check isAuthenticated
 function auto(req,res,next){
 	if(req.isAuthenticated() && "admin"==req.user.type) {

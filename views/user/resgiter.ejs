@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Home Property | Register</title>
+    <title>BookStore | Đăng ký</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -46,35 +46,50 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+         
           <div class="aa-signin-area">
             <% if(!user){ %>
             <div class="aa-signin-form">
+
+              <div>
+                  <% if(hasErrors){ %>
+                    <% messages.forEach(function(err){ %>
+                    
+                   <h6> <%= err %></h6>
+                    <% }) %>
+                  <% } %>
+              </div>
+
               <div class="aa-signin-form-title">
-                <a class="aa-property-home" href="/">Property Home</a>
+                <a class="aa-property-home" href="/">BookStore</a>
 
                
-                <h4>Create your account and Stay with us</h4>
+                <h4>Đăng ký</h4>
               </div>
               <form class="contactform" method="POST" action="/users/resgiter">                                                 
                 <div class="aa-single-field">
-                  <label for="name">Name <span class="required">*</span></label>
+                  <label for="name">Tên <span class="required">*</span></label>
                   <input type="text" required="required" aria-required="true" value="" name="name">
                 </div>
                 <div class="aa-single-field">
-                  <label for="number">Phone <span class="required">*</span></label>
+                  <label for="number">Số điện thoại <span class="required">*</span></label>
                   <input type="text" required="required" aria-required="true" value="" name="phone">
+                </div>
+                <div class="aa-single-field">
+                  <label for="number">Địa chỉ <span class="required">*</span></label>
+                  <input type="text" required="required" aria-required="true"  name="addr" required>
                 </div>
                 <div class="aa-single-field">
                   <label for="email">Email <span class="required">*</span></label>
                   <input type="email" required="required" aria-required="true" value="" name="email">
                 </div>
                 <div class="aa-single-field">
-                  <label for="password">Password <span class="required">*</span></label>
+                  <label for="password">Mật khẩu</label> <span class="required">*</span></label>
                   <input type="password" name="password"> 
                 </div>
                 <div class="aa-single-field">
-                  <label for="confirm-password">Confirm Password <span class="required">*</span></label>
-                  <input type="password" name="confirm-password"> 
+                  <label for="confirm-password">Nhập lại mật khẩu <span class="required">*</span></label>
+                  <input type="password" name="confirm-password" required> 
                 </div>
                
                 <div class="aa-single-submit">
@@ -86,31 +101,33 @@
             <% if(user){ %>
               <div class="aa-signin-form">
                 <div class="aa-signin-form-title">
-                  <a class="aa-property-home" href="/">Property Home</a>
-  
-                 
-                  <h4>Update your account and Stay with us</h4>
+                  <a class="aa-property-home" href="/">BookStore</a>        
+                  <h4>Cập nhật lại tài khoản</h4>
                 </div>
                 <form class="contactform" method="POST" action="/users/update/<%= user.id %>">                                                 
                   <div class="aa-single-field">
-                    <label for="name">Name <span class="required">*</span></label>
-                    <input type="text" required="required" aria-required="true" value="<%= user.name %>" name="name">
+                    <label for="name">Tên <span class="required">*</span></label>
+                    <input type="text" required="required" aria-required="true" value="<%= user.name %>" name="name" required>
                   </div>
                   <div class="aa-single-field">
-                    <label for="number">Phone <span class="required">*</span></label>
-                    <input type="text" required="required" aria-required="true" value="<%= user.phone %>" name="phone">
+                    <label for="number">Số điện thoại <span class="required">*</span></label>
+                    <input type="number" required="required" aria-required="true" value="<%= user.phone %>" name="phone" required>
+                  </div>
+                  <div class="aa-single-field">
+                    <label for="number">Địa chỉ <span class="required">*</span></label>
+                    <input type="text" required="required" aria-required="true" value="<%= user.addr %>" name="phone" required>
                   </div>
                   <div class="aa-single-field">
                     <label for="email">Email <span class="required">*</span></label>
                     <input type="email" required="required" aria-required="true" value="<%= user.email %>" name="email">
                   </div>
                   <div class="aa-single-field">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <input type="password" name="password"> 
+                    <label for="password">Mật Khẩu <span class="required">*</span></label>
+                    <input type="password" name="password" required> 
                   </div>
                   <div class="aa-single-field">
-                    <label for="confirm-password">Confirm Password <span class="required">*</span></label>
-                    <input type="password" name="confirm-password"> 
+                    <label for="confirm-password">Mật khẩu <span class="required">*</span></label>
+                    <input type="password" name="confirm-password" required> 
                   </div>
           
                   <div class="aa-single-submit">
@@ -125,7 +142,7 @@
       </div>
     </div>
   </section> 
-
+  
 
   <!-- jQuery library -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->

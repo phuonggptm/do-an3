@@ -36,6 +36,11 @@
 */
 /* BASE - Base tyles, Variables, Mixins, etc. */
 
+
+.aa-footer-middle a i{
+  margin-right: 46px;
+}
+
 body {
   background-color: #ffffff;
   font-family: "Open Sans", sans-serif;
@@ -280,6 +285,10 @@ img {
 
 /*scrol to top*/
 
+
+a,p{
+  font-family:  Helvetica, sans-serif
+}
 .scrollToTop {
   bottom: 60px;
   color: #fff;
@@ -904,7 +913,7 @@ img {
 ====================*/
 
 #aa-promo-banner {
-  background-image: url("../img/promo-banner.jpg");
+ 
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
@@ -953,11 +962,17 @@ img {
  AGENTS SECTION
 ====================*/
 
+.status-img {
+  height:50px ;
+  margin: 30px auto;
+  
+
+}
 #aa-agents {
   display: inline;
   float: left;
   width: 100%;
-  padding: 100px 0;
+  padding: 10px 0;
 }
 #aa-agents .aa-agents-area {
   display: inline;
@@ -2474,7 +2489,7 @@ img {
 ====================*/
 
 #aa-signin {
-  background-image: url("../img/signin-bg.jpg");
+  background-image: url("/images/signin.jpg");
   background-position: center center;
   background-size: cover;
   bottom: 0;
@@ -2487,7 +2502,7 @@ img {
   width: 100%;
 }
 #aa-signin:before {
-  background-color: rgba(0, 0, 0, 0.8);
+
   content: '';
   position: fixed;
   left: 0;
@@ -2504,9 +2519,10 @@ img {
 #aa-signin .aa-signin-area .aa-signin-form {
   background-color: rgba(255, 255, 255, 0.6);
   display: inline;
-  padding: 50px;
+  padding: 40px 70px;
   float: left;
   width: 100%;
+  border-radius: 27px;
 }
 #aa-signin .aa-signin-area .aa-signin-form .aa-signin-form-title {
   display: inline;
@@ -2533,7 +2549,7 @@ img {
   display: inline;
   float: left;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 #aa-signin .aa-signin-area .aa-signin-form .aa-single-field label {
   color: #000;

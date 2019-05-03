@@ -25,8 +25,8 @@ var $ = require("jquery")(window);
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
 var usersRouter = require('./routes/users');
-var landlordRouter = require('./routes/admin');
-const ejsLint = require('ejs-lint');
+var adminRouter = require('./routes/admin');
+var typeRouter = require('./routes/type');
 
 var app = express();
 
@@ -86,7 +86,8 @@ app.use(session({
 
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
-  app.use('/admin', landlordRouter);
+  app.use('/admin', adminRouter);
+  app.use('/type', typeRouter);
   app.use('/product',productRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
